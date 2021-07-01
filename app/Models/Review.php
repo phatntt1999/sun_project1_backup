@@ -11,14 +11,16 @@ class Review extends Model
 
     protected $fillable = [
         'title',
-        'content',
-        'count_like',
-        'account_id',
+        'content1',
+        'content2',
+        'content3',
+        'status-public',
+        'account-id',
         'category_review_id',
     ];
     public function images()
     {
-        return $this->hasMany(Image::class, 'object_id', 'id');
+        return $this->morphMany(Image::class, 'imageable');
     }
     public function category_review()
     {
@@ -26,10 +28,10 @@ class Review extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class, 'account_id', 'id');
+        return $this->belongsTo(User::class, 'account-id', 'id');
     }
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'review_id', 'id');
+        return $this->hasMany(Comment::class, 'review-id', 'id');
     }
 }

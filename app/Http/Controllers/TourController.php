@@ -66,7 +66,6 @@ class TourController extends Controller
             return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
         }
         $images = $tour->images->all();
-
         return view('tour', compact('tour', 'images'));
     }
 

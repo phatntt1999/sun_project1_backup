@@ -13,7 +13,6 @@ return [
     'category' => 'Category',
     'when' => 'When',
     'duration' => 'Duration',
-    'price' => 'Price',
     'min_price' => 'Min Price',
     'max_price' => 'Max Price',
     'search' => 'Search',

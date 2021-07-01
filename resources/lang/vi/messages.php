@@ -15,7 +15,10 @@ return [
     'duration' => 'Thời gian',
     'min_price' => 'Giá tối thiểu',
     'max_price' => 'Giá tối đa',
+<<<<<<< HEAD
     'price' => 'Giá',
+=======
+>>>>>>> first commit
     'search' => 'Tìm Kiếm',
     'get_started' => 'Chi Tiết',
     'hot_tour' => 'Tour Đang Hot',
@@ -65,8 +68,8 @@ return [
     'comment' => 'Bình luận',
     'reply' => 'Trả lời',
     'base_on' => 'Dựa trên',
-    'reviews' => 'Đánh giá',
-    'review' => 'Đánh giá',
+    'reviews' => 'Bài đăng',
+    'review' => 'Bài đăng',
     'about_travel' => 'Thông tin',
     'top_tour' => 'Tours đang hot',
     'interest' => 'Hấp dẫn',

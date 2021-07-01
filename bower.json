@@ -3,11 +3,10 @@
   "description": "",
   "main": "",
   "authors": [
-    "phatntt1999 <phatntt1999@gmail.com>"
+    "thaovy29 <thaovyduong2902@gmail.com>"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/phatntt1999/php_oe45_booking",
-  "private": true,
+  "homepage": "https://github.com/thaovy2902/php_oe45_booking",
   "ignore": [
     "**/.*",
     "node_modules",

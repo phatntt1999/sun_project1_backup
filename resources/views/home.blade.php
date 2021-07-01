@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 @extends('layouts.app_body')
 @section('header')
 @include('header.header_guess')
 <!-- end:header-top -->
 @include('header.header_search')
+=======
+@extends('layouts.app_body')	
+@section('header')
+@include('components.header_guess')
+<!-- end:header-top -->
+@include('components.header_search')
+>>>>>>> first commit
 @endsection
 @section('content')
 <!-- Hot Tours -->
@@ -215,7 +223,11 @@
 							</div>
 						</a>
 					</li>
+<<<<<<< HEAD
 				</ul>
+=======
+				</ul>		
+>>>>>>> first commit
 			</div>
 		</div>
 	</div>
@@ -244,7 +256,11 @@
 							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
 							<p><a href="#">{{ trans('messages.learn_more') }}</a></p>
 						</div>
+<<<<<<< HEAD
 					</div>
+=======
+					</div> 
+>>>>>>> first commit
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-6">
@@ -258,7 +274,11 @@
 							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
 							<p><a href="#">{{ trans('messages.learn_more') }}</a></p>
 						</div>
+<<<<<<< HEAD
 					</div>
+=======
+					</div> 
+>>>>>>> first commit
 				</div>
 			</div>
 			<div class="clearfix visible-sm-block"></div>
@@ -274,16 +294,24 @@
 							<p><a href="#">{{ trans('messages.learn_more') }}</a></p>
 						</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 					</div>
 =======
 					</div>
+>>>>>>> first commit
+=======
+					</div> 
 >>>>>>> first commit
 				</div>
 			</div>
 			<div class="clearfix visible-md-block"></div>
 		</div>
 		<div class="col-md-12 text-center animate-box">
+<<<<<<< HEAD
 			<p><a class="btn btn-primary btn-outline btn-lg" href="{{ route('reviews.index') }}">{{ trans('messages.see_all_post') }}<i class="icon-arrow-right22"></i></a></p>
+=======
+			<p><a class="btn btn-primary btn-outline btn-lg" href="#">{{ trans('messages.see_all_post') }}<i class="icon-arrow-right22"></i></a></p>
+>>>>>>> first commit
 		</div>
 	</div>
 </div>

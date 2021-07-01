@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(RegisterRequest $request)
+    public function store(RegisteredUserRequest $request)
     {
         $user = User::create([
             'name' => $request->name,

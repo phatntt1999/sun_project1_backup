@@ -77,7 +77,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        if (!$user) {
+            return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
+        }
+        $avatar = $user->images->first();
+        if (!$avatar) {
+            $avatar = '/assets/images/service/default-avatar.png';
+        } else {
+            $avatar = $avatar->url;
+        }
+
+        return view('edit_profile', compact('user', 'avatar'));
     }
 
     /**

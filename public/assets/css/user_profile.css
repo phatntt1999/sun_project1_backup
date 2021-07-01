@@ -68,17 +68,8 @@
     overflow: hidden;
 }
 .profile-header .profile-header-cover {
-<<<<<<< HEAD
-<<<<<<< HEAD
     background-color: #4158D0;
     background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-=======
-    background: url(https://bootdey.com/img/Content/bg1.jpg) center no-repeat;
->>>>>>> first commit
-=======
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
->>>>>>> Manage Profile
     background-size: 100% auto;
     position: absolute;
     left: 0;

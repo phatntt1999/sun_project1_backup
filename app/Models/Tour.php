@@ -2,29 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tour extends Model
 {
     use HasFactory;
 
-    protected $table = 'tours';
-
     protected $fillable = [
         'name',
         'description',
         'duration',
-        'num_of_participants',
+        'num-of-participants',
         'cat_tour_id',
         'avgRate',
         'comment',
         'price',
     ];
-
     public function images()
     {
-        return $this->hasMany(Image::class, 'object_id', 'id');
+        return $this->morphMany(Image::class, 'imageable');
     }
     public function category_tour()
     {

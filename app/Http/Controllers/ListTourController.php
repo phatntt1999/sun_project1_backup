@@ -68,7 +68,7 @@ class ListTourController extends Controller
             'price' => $price,
         ]);
 
-        return redirect()->route('tours.index')->with('createSuccess', 'Create successfull');
+        return redirect()->route('admintours.index')->with('createSuccess', 'Create successfull');
     }
 
     /**
@@ -124,7 +124,7 @@ class ListTourController extends Controller
         $tour->price = $price;
         $tour->save();
 
-        return redirect()->route('tours.index')->with('Success', 'Action successfull');
+        return redirect()->route('admintours.index')->with('Success', 'Action successfull');
     }
 
     /**
@@ -140,6 +140,6 @@ class ListTourController extends Controller
         Tour::find($id_tour)->delete();
         // $tour->find($id_tour)->delete();
 
-        return redirect()->route('tours.index');
+        return redirect()->route('admintours.index');
     }
 }

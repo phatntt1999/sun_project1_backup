@@ -15,10 +15,6 @@ return [
     'duration' => 'Thời gian',
     'min_price' => 'Giá tối thiểu',
     'max_price' => 'Giá tối đa',
-<<<<<<< HEAD
-    'price' => 'Giá',
-=======
->>>>>>> first commit
     'search' => 'Tìm Kiếm',
     'get_started' => 'Chi Tiết',
     'hot_tour' => 'Tour Đang Hot',
@@ -129,4 +125,8 @@ return [
     'payment_success' => 'Giao dịch thành công',
     'payment_fail' => 'Thanh toán thất bại',
     'invalid-sign' => 'Chữ ký không hợp lệ',
+    'reviews_0' => 'Bạn không có bài đăng nào',
+    'review_create' => 'Tạo bài viết thành công.',
+    'domestic_travel' => 'Du lịch trong nước',
+    'national_travel' => 'Du lịch nước ngoài'
 ];

@@ -97,7 +97,7 @@
                                  </h1>
                               </div>
                               <div class="bookbtn">
-                                 <a href="{{ route('booking') }}" class="a-btn">
+                                 <a href="{{ route('booking', ['tour' => $tour->id]) }}" class="a-btn">
                                     <span>{{ trans('messages.book_now') }}</span>
                                  </a>
                               </div>
@@ -169,3 +169,4 @@
    </div>
 </section>
 @endsection
+

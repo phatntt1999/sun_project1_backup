@@ -120,9 +120,13 @@ return [
     'status' => 'Status',
     'trans_id' => 'Transaction ID',
     'swift_code' => 'Swift Code',
-    'hello' => 'Hello, ',
+    'hello' => 'Hello,',
     'payment_unit' => 'Payment Unit',
     'payment_success' => 'Successful transaction',
     'payment_fail' => 'Payment fail',
     'invalid-sign' => 'Invalid Signature',
+    'reviews_0' => 'You dont have any reviews',
+    'review_create' => 'Post has been created.',
+    'domestic_travel' => 'Domestic Travel',
+    'national_travel' => 'National Travel'
 ];

@@ -44,9 +44,11 @@ class TourController extends Controller
     public function search(Request $request)
     {
         $destination = $request->input('destination');
+        $duration = $request->input('duration');
         $min_price = $request->input('min_price');
         $max_price = $request->input('max_price');
         $tours = Tour::with('images')->where('name', 'LIKE', '%' . $destination . '%')
+            ->where('duration', 'LIKE', '%' . $duration . '%')
             // ->whereBetween("price", [$min_price, $max_price])
             ->paginate(config('app.default_paginate_tour'));
 
@@ -66,6 +68,7 @@ class TourController extends Controller
             return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
         }
         $images = $tour->images->all();
+
         return view('tour', compact('tour', 'images'));
     }
 

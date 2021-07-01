@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::get('users/profile/{id}', [UserController::class, 'show_edit'])->name('edit_profile');
 
 Route::resource('users', UserController::class)->only([
-    'index', 'store', 'update',
+    'index', 'show', 'store', 'update',
 ]);
 Route::resource('orders', UserController::class)->only([
     'index', 'show', 'store', 'update',
@@ -29,12 +29,11 @@ Route::resource('orders', UserController::class)->only([
 Route::resource('comments', CommentController::class)->only([
     'index', 'show', 'store',
 ])->middleware(['auth']);
-Route::get('/dashboard', function () {
-    return view('dashboard')->name('dashboard');
-})->middleware(['auth']);
+
 Route::resource('tours', TourController::class)->only([
     'index', 'show',
 ]);
+
 Route::resource('admin/admintours', ListTourController::class)
     ->middleware('role');
 

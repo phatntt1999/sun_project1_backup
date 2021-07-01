@@ -12,7 +12,7 @@
                                 <ul class="sf-menu" id="fh5co-primary-menu">
                                     <li class="active"><a href="{{ route('home') }}">{{ trans('messages.home') }}</a></li>
                                     <li>
-                                        <a href="{{ route('tours.index') }}" class="fh5co-sub-ddown">{{ trans('messages.destinations') }} 
+                                        <a href="{{ route('tours.index') }}" class="fh5co-sub-ddown">{{ trans('messages.destinations') }}
                                             <span>&#9660;</span>
                                         </a>
                                         <ul class="fh5co-sub-menu">
@@ -79,7 +79,7 @@
                             </nav>
                             <div class="menu-user">
                                 <li class="dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
+                                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                                         {{ trans('messages.welcome') }}, User <b class="caret"></b>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
@@ -88,13 +88,13 @@
                                         <a class="dropdown-item" href="{{ route('logout') }}">{{ trans('messages.logout') }}</a>
                                     </div>
                                 </li>
-                            </div> 
+                            </div>
                         @else
                         <nav id="fh5co-menu-wrap" role="navigation">
                             <ul class="sf-menu" id="fh5co-primary-menu">
                                 <li class="active"><a href="{{ route('home') }}">{{ trans('messages.home') }}</a></li>
                                 <li>
-                                    <a href="{{ route('tours.index') }}" class="fh5co-sub-ddown">{{ trans('messages.destinations') }} 
+                                    <a href="{{ route('tours.index') }}" class="fh5co-sub-ddown">{{ trans('messages.destinations') }}
                                         <span>&#9660;</span>
                                     </a>
                                     <ul class="fh5co-sub-menu">
@@ -150,17 +150,26 @@
                                 <li><a href="#">{{ trans('messages.contact') }}</a></li>
                                 <li><a href="{{ route('login') }}"
                                     class="text-sm text-gray-700 underline">{{ trans('messages.signin') }}</a></li>
-        
+
                             @if (Route::has('register'))
                                 <li><a href="{{ route('register') }}"
                                     class="ml-4 text-sm text-gray-700 underline">{{ trans('messages.signup') }}</a></li>
                             @endif
+                            <li class="nav-item-dropdown">
+                                <a href="#" class="fh5co-sub-ddown">{{ trans('messages.language') }}
+                                    <span>&#9660;</span>
+                                </a>
+                                <ul class="fh5co-sub-menu">
+                                    <li><a href="{{route('language',['en'])}}">{{ trans('messages.english') }}</a></li>
+                                    <li><a href="{{route('language',['vi'])}}">{{ trans('messages.vietnam') }}</a></li>
+                                </ul>
+                            </li>
                         @endauth
                             </ul>
                         </nav>
                     @endif
                 </div>
-            </div>          
-        </div>   
+            </div>
+        </div>
     </header>
 </div>

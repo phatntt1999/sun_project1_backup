@@ -37,7 +37,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['account-id'] = auth()->user()->id;
+        $input['account_id'] = auth()->user()->id;
 
         $comment = Comment::create($input);
         $comment->save();

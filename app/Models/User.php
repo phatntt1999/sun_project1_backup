@@ -46,14 +46,14 @@ class User extends Authenticatable
     }
     public function tours()
     {
-        return $this->belongsToMany(Tours::class, 'Booking-tour', 'id', 'id');
+        return $this->belongsToMany(Tours::class, 'BookingTour', 'id', 'id');
     }
     public function reviews()
     {
-        return $this->hasMany(Review::class, 'account-id', 'id');
+        return $this->hasMany(Review::class, 'account_id', 'id');
     }
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'account-id', 'id');
+        return $this->hasMany(Comment::class, 'account_id', 'id');
     }
 }

@@ -83,12 +83,12 @@
         <div class="menu-user">
             <li class="dropdown">
                 <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
-                    Welcome, User <b class="caret"></b>
+                    {{ trans('messages.welcome') }}, User <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="{{ route('users.show', '1') }}">Manage Profile</a>
+                    <a class="dropdown-item" href="{{ route('users.show','1') }}">{{ trans('messages.manage_profile') }}</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('home') }}">Logout</a>
+                    <a class="dropdown-item" href="{{ route('home') }}">{{ trans('messages.logout') }}</a>
                 </div>
             </li>
         </div>     

@@ -16,8 +16,8 @@
 						@foreach ($reviews as $review)
 							<article class="blog_item">
 								<div class="blog_item_img">
-									@if($review->images->where('object-type','=','reviews')->first())
-										<img class="card-img rounded-0" src="{{ $review->images->where('object-type','=','reviews')->first()->url  }}" alt="">
+									@if(!empty($review->images->first()))
+										<img class="card-img rounded-0" src="{{ $review->images->first()->url  }}" alt="">
 									@else
 										<img class="card-img rounded-0" src="assets/images/destinations/NotFound.png" alt="">
 									@endif
@@ -32,8 +32,7 @@
 									</a>
 									<p>{{ $review->content1 }}</p>
 									<ul class="blog-info-link">
-										<li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-										<li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+										<li><a href="#"><i class="fa fa-user"></i> {{ $review->category_review->name_rv_cat }}</a></li>
 									</ul>
 								</div>
 							</article>
@@ -44,17 +43,26 @@
 			</div>
 			<div class="col-lg-4">
 				<div class="blog_right_sidebar">
+					@if (Route::has('login'))
+						@auth
+							<div class="add_form">
+								<a class="btn_add" href="{{ route('reviews.create') }}">
+									ADD
+								</a>
+							</div>
+						@endauth
+					@endif
 					<aside class="single_sidebar_widget post_category_widget">
 						<h4 class="widget_title">{{ trans('messages.category_blog') }}</h4>
 						<ul class="list cat-list">
 							<li>
 								<a href="#" class="d-flex">
-									<p>Resaurant food (41)</p>
+									<p>{{ trans('messages.domestic_travel') }} (41)</p>
 								</a>
 							</li>
 							<li>
 								<a href="#" class="d-flex">
-									<p>Travel news (12)</p>
+									<p>{{ trans('messages.national_travel') }} (12)</p>
 								</a>
 							</li>
 							<li>

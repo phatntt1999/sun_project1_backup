@@ -10,7 +10,7 @@ class Category_tour extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cat-name',
+        'cat_name',
     ];
     public function tours()
     {

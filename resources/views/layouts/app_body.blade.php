@@ -28,18 +28,17 @@
 	<link rel="stylesheet" href="{{ asset('/assets/css/bookingform.css') }}">
 	<link rel="stylesheet" href="{{ mix('/assets/css/style2.css') }}">
 	<link rel="stylesheet" href="{{ mix('/assets/css/superfish.css') }}">
-	<link rel="stylesheet" href="{{ mix('assets/css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ mix('assets/css/custom-heart.css') }}">
 	<link rel="stylesheet" href="{{ asset('/bower_components/icomoon-bower/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('/bower_components/font-awesome/css/all.css') }}">
 
 	<!-- JavaScript-->
-	<script href="{{ asset('assets/js/total.js') }}"></script>
-	<script src="{{ mix('/assets/js/modernizr-2.6.2.min.js') }}"></script>
 	<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+	<script src="{{ asset('assets/js/total.js') }}"></script>
+	<script src="{{ mix('/assets/js/modernizr-2.6.2.min.js') }}"></script>
 	<script src="{{ mix('assets/js/all-js.js') }}"></script>
 	<script src="{{ mix('/assets/js/main.js') }}"></script>
-	<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('assets/js/display_form.js') }}"></script>
 
 </head>

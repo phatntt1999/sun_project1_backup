@@ -10,6 +10,6 @@ class Category_review extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name-rv-cat',
+        'name_rv_cat',
     ];
 }

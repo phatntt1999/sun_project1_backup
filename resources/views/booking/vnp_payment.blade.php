@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="order_id">Mã hóa đơn</label>
-                    <input class="form-control" id="order_id" name="order_id" type="text" value="{{ $bookingId }}" />
+                    <input class="form-control" id="order_id" name="order_id" type="text" value="{{ $bookingId }}" disabled/>
                 </div>
                 <div class="form-group">
                     <label for="amount">Price</label>

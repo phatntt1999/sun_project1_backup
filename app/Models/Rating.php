@@ -11,9 +11,9 @@ class Rating extends Model
 
     protected $fillable = [
         'rating',
-        'status-rating',
-        'tour-id',
-        'account-id',
+        'status_rating',
+        'tour_id',
+        'account_id',
     ];
 
     public function user()

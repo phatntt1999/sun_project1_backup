@@ -12,11 +12,8 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-<<<<<<< HEAD
         <link href="{{ asset('assets/css/sb-admin-2.css') }}" rel="stylesheet">
 
-=======
->>>>>>> first commit
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>

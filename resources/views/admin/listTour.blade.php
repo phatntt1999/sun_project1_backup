@@ -68,10 +68,10 @@
                             <td>{{ $tour->rating }}</td>
                             <td>${{ $tour->price }}</td>
                             <td class="action-crud">
-                                <a href="{{ route('tours.edit', ['tour' => $tour->id]) }}" class="btn btn-info btn-circle btn-edit">
+                                <a href="{{ route('admintours.edit', ['tour' => $tour->id]) }}" class="btn btn-info btn-circle btn-edit">
                                     <i class="fas fa-pen"></i>
                                 </a>
-                                <form action="{{ route('tours.destroy', ['tour' => $tour->id ]) }}" method="POST">
+                                <form action="{{ route('admintours.destroy', ['tour' => $tour->id ]) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
@@ -79,9 +79,6 @@
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
-                                {{-- <a href="{{ route('tours.destroy', $tour->id) }}" class="btn btn-danger btn-circle">
-                                    <i class="fas fa-trash"></i>
-                                </a> --}}
 
                             </td>
                         </tr>

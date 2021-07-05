@@ -13,10 +13,7 @@ return [
     'category' => 'Category',
     'when' => 'When',
     'duration' => 'Duration',
-<<<<<<< HEAD
     'price' => 'Price',
-=======
->>>>>>> first commit
     'min_price' => 'Min Price',
     'max_price' => 'Max Price',
     'search' => 'Search',
@@ -115,4 +112,18 @@ return [
     'payment' => 'Payment',
     'day' => 'day',
     'night' => 'night',
+    'invoice' => 'INVOICE',
+    'invoice_id' => 'Invoice ID',
+    'price' => 'Price',
+    'content' => 'Content',
+    'response_code' => 'Response Code',
+    'due_date' => 'Due Date',
+    'status' => 'Status',
+    'trans_id' => 'Transaction ID',
+    'swift_code' => 'Swift Code',
+    'hello' => 'Hello, ',
+    'payment_unit' => 'Payment Unit',
+    'payment_success' => 'Successful transaction',
+    'payment_fail' => 'Payment fail',
+    'invalid-sign' => 'Invalid Signature',
 ];

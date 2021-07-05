@@ -1,8 +1,8 @@
 @extends('layouts.app_body')
 @section('header')
-@include('components.header_guess')
+@include('header.header_user')
 <!-- end:header-top -->
-@include('components.header_review')
+@include('header.header_review')
 @endsection
 @section('content')
 <!-- Blog -->
@@ -16,7 +16,11 @@
 						@foreach ($reviews as $review)
 							<article class="blog_item">
 								<div class="blog_item_img">
-									<img class="card-img rounded-0" src="{{ asset('assets/images/destinations/h.jpg') }}" alt="">
+									@if($review->images->where('object-type','=','reviews')->first())
+										<img class="card-img rounded-0" src="{{ $review->images->where('object-type','=','reviews')->first()->url  }}" alt="">
+									@else
+										<img class="card-img rounded-0" src="assets/images/destinations/NotFound.png" alt="">
+									@endif
 									<a href="#" class="blog_item_date">
 										<h3>15</h3>
 										<p>Jan</p>

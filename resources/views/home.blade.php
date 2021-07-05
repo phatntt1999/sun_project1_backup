@@ -1,8 +1,8 @@
 @extends('layouts.app_body')
 @section('header')
-@include('components.header_user')
+@include('header.header_guess')
 <!-- end:header-top -->
-@include('components.header_search')
+@include('header.header_search')
 @endsection
 @section('content')
 <!-- Hot Tours -->
@@ -283,7 +283,7 @@
 			<div class="clearfix visible-md-block"></div>
 		</div>
 		<div class="col-md-12 text-center animate-box">
-			<p><a class="btn btn-primary btn-outline btn-lg" href="#">{{ trans('messages.see_all_post') }}<i class="icon-arrow-right22"></i></a></p>
+			<p><a class="btn btn-primary btn-outline btn-lg" href="{{ route('reviews.index') }}">{{ trans('messages.see_all_post') }}<i class="icon-arrow-right22"></i></a></p>
 		</div>
 	</div>
 </div>

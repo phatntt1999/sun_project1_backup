@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryReview;
+use App\Models\LikeReview;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::oldest()->paginate(config('app.default_paginate_review'));
+        $reviews = Review::with('images')->oldest()->paginate(config('app.default_paginate_review'));
 
         return view('blog', compact('reviews'));
     }
@@ -68,8 +69,13 @@ class ReviewController extends Controller
             return redirect()->route('reviews.index')->with('error', trans('messages.not_found_review'));
         }
         $images = $review->images->all();
+        $user = $review->user;
 
-        return view('single-blog', compact('review', 'images'));
+        $liked = LikeReview::where('account_id', Auth::id())->where('review_id', $id)->first();
+        $likeController = new LikeController;
+        $countLike = $likeController->countLike($id);
+
+        return view('single-blog', compact('review', 'images', 'user', 'liked', 'countLike'));
     }
 
     /**

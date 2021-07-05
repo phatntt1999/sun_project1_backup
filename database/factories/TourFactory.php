@@ -29,7 +29,7 @@ class TourFactory extends Factory
             'duration' => rand(2, 7),
             'num_of_participants' => random_int(20, 50),
             'cat_tour_id' => CategoryTour::all()->random()->id,
-            'rating' => rand(1, 5),
+            'avgRate' => 0,
             'price' => rand(50, 500),
         ];
     }

@@ -22,6 +22,7 @@ class CreateBookingToursTable extends Migration
             $table->integer('quantity');
             $table->integer('tour_id');
             $table->integer('account_id');
+            $table->integer('duration');
         });
     }
 

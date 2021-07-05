@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <form class="well form-horizontal" action="{{ route('tours.store') }}" method="POST" id="contact_form">
+    <form class="well form-horizontal" action="{{ route('admintours.store') }}" method="POST" id="contact_form">
         @csrf
         {{-- {{ method_field('GET') }} --}}
 

@@ -11,19 +11,19 @@ class Image extends Model
 
     protected $fillable = [
         'url',
-        'object-type',
-        'object-id',
+        'object_type',
+        'object_id',
     ];
     public function tour()
     {
-        return $this->belongsTo(Tour::class, 'object-id', 'id');
+        return $this->belongsTo(Tour::class, 'object_id', 'id');
     }
     public function user()
     {
-        return $this->belongsTo(User::class, 'object-id', 'id');
+        return $this->belongsTo(User::class, 'object_id', 'id');
     }
     public function review()
     {
-        return $this->belongsTo(Review::class, 'object-id', 'id');
+        return $this->belongsTo(Review::class, 'object_id', 'id');
     }
 }

@@ -1,8 +1,8 @@
 @extends('layouts.app_body')
 @section('header')
-@include('components.header_guess')
+@include('header.header_user')
 <!-- end:header-top -->
-@include('components.header_search')
+@include('header.header_search')
 @endsection
 @section('content')
 <!-- Destinations -->

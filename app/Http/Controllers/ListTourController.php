@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CategoryTour;
 use Illuminate\Http\Request;
 use App\Models\Tour;
+use Illuminate\Support\Facades\Auth;
 
 class ListTourController extends Controller
 {
@@ -20,10 +21,12 @@ class ListTourController extends Controller
      */
     public function index()
     {
+        $authId = Auth::user()->name;
         $tours = Tour::orderBy('created_at', 'asc')->get();
 
         return view('admin.listTour', [
             'tours' => $tours,
+            'authId' => $authId,
         ]);
     }
 

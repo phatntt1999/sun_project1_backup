@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <form class="well form-horizontal" action="{{ route('tours.update', ['tour' => $tour->id]) }}" method="POST" id="contact_form">
+    <form class="well form-horizontal" action="{{ route('admintours.update', ['tour' => $tour->id]) }}" method="POST" id="contact_form">
         @csrf
         {{ method_field('PUT') }}
 

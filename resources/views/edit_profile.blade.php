@@ -1,6 +1,6 @@
 @extends('layouts.app_body')
 @section('header')
-@include('components.header_user')
+@include('header.header_user')
 <!-- end:header-top -->
 <div class="fh5co-hero-review" style="height: 400px;">
     <div class="profile-header">

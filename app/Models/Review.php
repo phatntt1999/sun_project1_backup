@@ -18,10 +18,18 @@ class Review extends Model
     ];
     public function images()
     {
-        return $this->hasMany(Image::class, 'object-id', 'id');
+        return $this->hasMany(Image::class, 'object_id', 'id');
     }
     public function category_review()
     {
         return $this->belongsTo(Category_review::class, 'id', 'id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'account_id', 'id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'review_id', 'id');
     }
 }

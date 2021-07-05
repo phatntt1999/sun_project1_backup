@@ -16,13 +16,12 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('tailwindcss'),
     require('autoprefixer'),
 ])
-    .autoload({
-        jquery: ['$', 'window.jQuery', 'jQuery'],
-    });
+
 mix.styles('resources/assets/css/style.css', 'public/assets/css/style.css');
+mix.styles('resources/assets/css/bootstrap.css', 'public/assets/css/bootstrap.css');
 mix.styles('resources/assets/css/style2.css', 'public/assets/css/style2.css');
 mix.styles('resources/assets/css/superfish.css', 'public/assets/css/superfish.css');
-mix.styles('resources/assets/css/bootstrap.css', 'public/assets/css/bootstrap.css');
+mix.styles('resources/assets/css/custom-heart.css', 'public/assets/css/custom-heart.css');
 
 mix.js([
     'resources/assets/js/superfish.js',

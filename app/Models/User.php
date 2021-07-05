@@ -42,10 +42,18 @@ class User extends Authenticatable
     ];
     public function images()
     {
-        return $this->hasMany(Image::class, 'object-id', 'id');
+        return $this->hasMany(Image::class, 'object_id', 'id');
     }
     public function tours()
     {
-        return $this->belongsToMany(Tours::class, 'Booking-tour', 'id', 'id');
+        return $this->belongsToMany(Tours::class, 'Booking_tour', 'id', 'id');
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'account_id', 'id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'account_id', 'id');
     }
 }

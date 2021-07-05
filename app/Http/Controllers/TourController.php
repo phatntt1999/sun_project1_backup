@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TourController extends Controller
 {
@@ -15,8 +16,9 @@ class TourController extends Controller
     public function index()
     {
         $tours = Tour::with('images')->oldest()->paginate(config('app.default_paginate_tour'));
-
-        return view('destinations', compact('tours'));
+        return view('destinations', [
+            'tours' => $tours,
+        ]);
     }
 
     /**
@@ -41,23 +43,14 @@ class TourController extends Controller
     }
     public function search(Request $request)
     {
-        $category = $request->input('category');
         $destination = $request->input('destination');
-        $duration = $request->input('duration');
         $min_price = $request->input('min_price');
         $max_price = $request->input('max_price');
         $tours = Tour::with('images')->where('name', 'LIKE', '%' . $destination . '%')
-            ->where('category', '=', "$category")
-            ->whereBetween("price", [$min_price, $max_price])
-            ->get()->paginate(config('app.default_paginate_tour'));
-        foreach ($tours as $tour) {
-            $images = $tour->images->first();
-            if (!$images) {
-                $arr[] = 'assets/images/destinations/NotFound.png';
-            } else $arr[] = $images->url;
-        }
+            // ->whereBetween("price", [$min_price, $max_price])
+            ->paginate(config('app.default_paginate_tour'));
 
-        return view('destinations', compact('tours', 'arr'));
+        return view('destinations', compact('tours'));
     }
 
     /**

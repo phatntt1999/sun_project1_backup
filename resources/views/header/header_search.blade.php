@@ -16,7 +16,8 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="flights">
                                     <div class="row">
-                                        <form action="#" method="post">
+                                        <form action="{{ route('search') }}" method="GET">
+                                            {{ csrf_field() }}
                                             <div class="col-xs-12">
                                                 <div class="input-field">
                                                     <label for="destination">{{ trans('messages.destination') }}:</label>
@@ -60,7 +61,7 @@
                                                 <input type="submit" name="search" class="btn btn-primary btn-block" value="{{ trans('messages.search') }}">
                                             </div>
                                         </form>
-                                        
+
                                     </div>
                                 </div>
                             </div>

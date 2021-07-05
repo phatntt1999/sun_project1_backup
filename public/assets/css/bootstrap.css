@@ -4663,10 +4663,8 @@ tbody.collapse.in {
 }
 
 .open>.dropdown-menu {
-  <<<<<<< HEAD <<<<<<< HEAD display: block;
-  =======width: 200px;
-  =======width: 250px;
-  >>>>>>>Manage Profile display: block;
+  width: 250px;
+  display: block;
   padding: 10px 7px 10px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -4677,7 +4675,6 @@ tbody.collapse.in {
   -ms-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   -o-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  >>>>>>>first commit
 }
 
 .open>a {
@@ -5995,7 +5992,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 
 .breadcrumb>li+li:before {
-  content: "/ ";
+  content: "/ ";
   padding: 0 5px;
   color: #ccc;
 }
@@ -7853,9 +7850,8 @@ button.close {
 .carousel-inner>.item>a>img {
   display: block;
   max-width: 100%;
-  <<<<<<< HEAD height: auto;
-  =======height: 450px;
-  >>>>>>>first commit line-height: 1;
+  height: 450px;
+  line-height: 1;
 }
 
 @media all and (transform-3d),

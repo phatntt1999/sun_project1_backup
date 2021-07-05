@@ -32,7 +32,7 @@ class ReturnedResultPayment extends Controller
         //$secureHash = md5($vnp_HashSecret . $hashData);
         $secureHash = hash('sha256', config('configPayment.vnp_HashSecret') . $hashData);
 
-        return view('booking.vnp_return', [
+        return view('booking.vnp_response', [
             'vnp_TxnRef' => $_GET['vnp_TxnRef'],
             'vnp_Amount' => $_GET['vnp_Amount'],
             'vnp_OrderInfo' => $_GET['vnp_OrderInfo'],

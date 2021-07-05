@@ -1,8 +1,8 @@
 @extends('layouts.app_body')
 @section('header')
-@include('components.header_guess')
+@include('header.header_user')
 <!-- end:header-top -->
-@include('components.header_review')
+@include('header.header_review')
 @endsection
 @section('content')
 <!-- Blog -->
@@ -36,40 +36,40 @@
                             <ul class="blog-info-link mt-3 mb-4">
                                 <li><a href="#"><i class=""></i> Travel, Lifestyle</a></li>
                             </ul>
-                            <p class="excert">
+                            {{-- <p class="excert">
                                 {{ $review->content1 }}
                             </p>
                             <p>
                                 {{ $review->content1 }}
-                            </p>
-                            <div class="quote-wrapper">
-                                <div class="quotes">
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get the MCSE study materials yourself at
-                                a fraction of the camp price. However, who has the willpower to actually sit through a
-                                self-imposed MCSE training.
-                                </div>
-                            </div>
-                            <p>
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                                fraction of the camp price. However, who has the willpower
-                            </p>
-                            <p>
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                                fraction of the camp price. However, who has the willpower to actually sit through a
-                                self-imposed MCSE training. who has the willpower to actually
-                            </p>
+                            </p> --}}
+                            <span>
+                                {!! $review->content !!}
+                            </span>
                         </div>
                     </div>
                     <div class="navigation-top">
                         <div class="d-sm-flex justify-content-between">
                             <p class="like-info">
-                                <a href="">
-                                    <i class="icon-heart-outlined"></i>
-                                </a>
-                                Lily and 4 people like this
+                                <div class="buttonHeart">
+                                    @if (empty($liked))
+                                        <button class="content 1 ">
+                                            <span class="heart 1 "></span>
+                                            <span class="text 1">Like</span>
+
+                                        </button>
+                                        <span class="numb 1">{{ $countLike ?? '' }} </span>
+                                    @else
+                                        <button class="content 1 heart-active">
+                                            <span class=" heart 1 heart-active"></span>
+                                            <span class="text 1 heart-active">Like</span>
+
+                                        </button>
+                                        <span class="numb 1 heart-active">{{ $countLike }}</span>
+                                        <i class="user-like">People like this</i>
+                                    @endif
+                                </div>
+
+
                             </p>
                         </div>
                         <div class="navigation-area">
@@ -102,101 +102,30 @@
                     </div>
                     <div class="blog-author">
                         <div class="media align-items-center">
-                            <img src="{{ asset('assets/images/blog/author.png') }}" alt="">
+                            @if ($user->images->first())
+                                <img class="avatar_reply" src="{{ asset("$user->images->first()->url") }}" alt="" />
+                            @else
+                                <img class="avatar_reply" src="{{ asset('/assets/images/service/default-avatar.png') }}" alt="" />
+                            @endif
                             <div class="media-body">
-                                <h4>Harvard milan</h4>
+                                <h4>{{ $user->name }}</h4>
                             </div>
                         </div>
                     </div>
                     <div class="comments-area">
-                        <h4>05 {{ trans('messages.comments') }}</h4>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="{{ asset('assets/images/comment/comment_1.png')}}" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                <a href="#">Emilly Blunt</a>
-                                                </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">{{ trans('messages.reply') }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="{{ asset('assets/images/comment/comment_1.png')}}" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                <a href="#">Emilly Blunt</a>
-                                                </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">{{ trans('messages.reply') }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="{{ asset('assets/images/comment/comment_1.png')}}" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                <a href="#">Emilly Blunt</a>
-                                                </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">{{ trans('messages.reply') }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <h4> {{ $review->comments->count() }} {{ trans('messages.comments') }}</h4>
+                        @include('comment_list', ['comments' => $review->comments->whereNull('comment-parent-id'), 'review_id' => $review->id])
                     </div>
                     <div class="comment-form">
                         <h4>{{ trans('messages.leave_reply') }}</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm">
+                        <form class="form-contact comment_form" action="{{ route('comments.store') }}" method="POST" id="commentForm">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-12">
                                 <div class="form-group">
-                                    <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                        placeholder="{{ trans('messages.write_cmt') }}"></textarea>
+                                    <textarea class="form-control w-100" name="content" id="comment" cols="30" rows="9"
+                                        placeholder="{{ trans('messages.write_cmt') }}" required></textarea>
+                                    <input type=hidden name='review-id' value="{{ $review->id }}" />
                                 </div>
                                 </div>
                             </div>
@@ -249,4 +178,23 @@
         </div>
     </div>
 </section>
+<script>
+    $('.content').click(function() {
+        // var review_id = {{ session('review_id') }};
+        var review_id = {{ $review->id }};
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('heart') }}",
+
+            data: {
+                review_id: review_id,
+            },
+            success: function(result) {
+                $('.numb').html(result);
+            }
+        });
+
+        $('.1').toggleClass("heart-active");
+    });
+</script>
 @endsection

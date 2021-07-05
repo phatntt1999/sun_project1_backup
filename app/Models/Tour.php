@@ -17,13 +17,14 @@ class Tour extends Model
         'duration',
         'num_of_participants',
         'cat_tour_id',
-        'rating',
+        'avgRate',
+        'comment',
         'price',
     ];
 
     public function images()
     {
-        return $this->hasMany(Image::class, 'object-id', 'id');
+        return $this->hasMany(Image::class, 'object_id', 'id');
     }
     public function category_tour()
     {
@@ -31,6 +32,6 @@ class Tour extends Model
     }
     public function users()
     {
-        return $this->belongsToMany(User::class, 'Booking-tour', 'id', 'id');
+        return $this->belongsToMany(User::class, 'Booking_tour', 'id', 'id');
     }
 }

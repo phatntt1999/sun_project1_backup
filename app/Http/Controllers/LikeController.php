@@ -10,25 +10,24 @@ class LikeController extends Controller
 {
     public function Like(Request $request)
     {
-        $id = Auth::id();
-        $like = LikeReview::where('account_id', $id)->where('review_id', $request->review_id)->first();
-
-        if (!empty($liking)) {
+        $Authid = Auth::id();
+        $like = LikeReview::where('account_id', $Authid)->where('review_id', $request->review_id)->first();
+        if (!empty($like)) {
             $deleteLike = LikeReview::where('id', $like->id);
             $deleteLike->delete();
         } else {
             $liking = new LikeReview;
-            $liking->user_id = Auth::id();
-            $liking->status = 1;
-            $liking->product_id = $request->product_id;
+            $liking->account_id = $Authid;
+            $liking->like_status = 1;
+            $liking->review_id = $request->review_id;
             $liking->save();
         }
         $likecontroller = new LikeController;
-        return $likecontroller->countLike();
+        return $likecontroller->countLike($request->review_id);
     }
-    public function countLike()
+    public function countLike($reviewId)
     {
-        $liking = LikeReview::where('product_id', session('product_id'))->count();
+        $liking = LikeReview::where('review_id', $reviewId)->count();
         if (!empty($liking)) {
             $liking;
         } else {

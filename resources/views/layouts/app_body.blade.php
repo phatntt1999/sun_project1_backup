@@ -23,23 +23,29 @@
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- Styles-->
 	<link rel="stylesheet" href="{{ mix('/assets/css/style.css') }}">
-	<link rel="stylesheet" href="{{ url('/assets/css/header.css') }}">
-	<link rel="stylesheet" href="{{ asset('public/assets/css/user_profile.css') }}">
-	<link rel="stylesheet" href="{{ asset('public/assets/css/bookingform.css') }}">
+	<link rel="stylesheet" href="{{ asset('/assets/css/header.css') }}">
+	<link rel="stylesheet" href="{{ asset('/assets/css/user_profile.css') }}">
+	<link rel="stylesheet" href="{{ asset('/assets/css/bookingform.css') }}">
 	<link rel="stylesheet" href="{{ mix('/assets/css/style2.css') }}">
 	<link rel="stylesheet" href="{{ mix('/assets/css/superfish.css') }}">
-	<link rel="stylesheet" href="{{ mix('/assets/css/bootstrap.css') }}">
-	<link rel="stylesheet" href="bower_components/icomoon-bower/style.css">
-	<link rel="stylesheet" href="bower_components/Font-Awesome/css/all.css">
+	<link rel="stylesheet" href="{{ mix('assets/css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ mix('assets/css/custom-heart.css') }}">
+	<link rel="stylesheet" href="{{ asset('/bower_components/icomoon-bower/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('/bower_components/font-awesome/css/all.css') }}">
+	<link rel="stylesheet" href="{{ asset('/bower_components/tailwindcss/tailwind.css') }}">
+	{{-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> --}}
+
 
 
 	<!-- JavaScript-->
 
+	<script href="{{ asset('assets/js/total.js') }}"></script>
 	<script src="{{ mix('/assets/js/modernizr-2.6.2.min.js') }}"></script>
-	<script src="{{ mix('assets/js/jquery.min.js') }}"></script>
+	<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 	<script src="{{ mix('assets/js/all-js.js') }}"></script>
 	<script src="{{ mix('/assets/js/main.js') }}"></script>
-	<script src="{{ mix('assets/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('assets/js/display_form.js') }}"></script>
 
 </head>
 <body >
@@ -84,110 +90,6 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
-
-	@yield('content')
-	<div id="fh5co-testimonial" style="background-image:url(images/img_bg_1.jpg);">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>{{ trans('messages.happy_clients') }}</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="box-testimony animate-box">
-						<blockquote>
-							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
-							<p>"{{ trans('messages.feedback1') }}"</p>
-						</blockquote>
-						<p class="author">Thao Vy</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="box-testimony animate-box">
-						<blockquote>
-							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
-							<p>"{{ trans('messages.feedback2') }}"</p>
-						</blockquote>
-						<p class="author">Sun</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="box-testimony animate-box">
-						<blockquote>
-							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
-							<p>{{ trans('messages.feedback3') }}</p>
-						</blockquote>
-						<p class="author">Nami</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<footer>
-		<div id="footer">
-			<div class="container">
-				<div class="row row-bottom-padded-md">
-					<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-						<h3>{{ trans('messages.about_travel') }}</h3>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-							there live the blind texts.</p>
-					</div>
-					<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-						<h3>{{ trans('messages.top_tour') }}</h3>
-						<ul>
-							<li><a href="#">Manila</a></li>
-							<li><a href="#">Dubai</a></li>
-							<li><a href="#">Bangkok</a></li>
-							<li><a href="#">Tokyo</a></li>
-							<li><a href="#">New York</a></li>
-						</ul>
-					</div>
-					<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-						<h3>{{ trans('messages.interest') }}</h3>
-						<ul>
-							<li><a href="#">Beaches</a></li>
-							<li><a href="#">Family Travel</a></li>
-							<li><a href="#">Budget Travel</a></li>
-							<li><a href="#">Food &amp; Drink</a></li>
-							<li><a href="#">Honeymoon and Romance</a></li>
-						</ul>
-					</div>
-					<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-						<h3>{{ trans('messages.best_places') }}</h3>
-						<ul>
-							<li><a href="#">Boracay Beach</a></li>
-							<li><a href="#">Dubai</a></li>
-							<li><a href="#">Singapore</a></li>
-							<li><a href="#">Hongkong</a></li>
-						</ul>
-					</div>
-					<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-						<h3>{{ trans('messages.affordable') }}</h3>
-						<ul>
-							<li><a href="#">Food &amp; Drink</a></li>
-							<li><a href="#">Fare Flights</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3 text-center">
-						<p class="fh5co-social-icons">
-							<a href="#"><i class="icon-twitter2"></i></a>
-							<a href="#"><i class="icon-facebook2"></i></a>
-							<a href="#"><i class="icon-instagram"></i></a>
-							<a href="#"><i class="icon-dribbble2"></i></a>
-							<a href="#"><i class="icon-youtube"></i></a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-</body>
-
-=======
 </div>
 <footer>
 	<div id="footer">
@@ -248,6 +150,6 @@
 		</div>
 	</div>
 </footer>
+@livewireScripts
 </body>
->>>>>>> first commit
 </html>

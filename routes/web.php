@@ -10,23 +10,34 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 Route::get('language/{language}', [LanguageController::class, 'index'])->name('language');
 Route::get('/', function () {
-    return view('booking');
+    return view('home_user');
 })->name('home');
 
 Route::get('users/profile/{id}', [UserController::class, 'show_edit'])->name('edit_profile');
 
 Route::resource('users', UserController::class)->only([
-    'show', 'store', 'update',
+    'index', 'store', 'update',
 ]);
 Route::resource('orders', UserController::class)->only([
-    'show',
-]);
+    'index', 'show', 'store', 'update',
+])->middleware(['auth']);
+Route::resource('comments', CommentController::class)->only([
+    'index', 'show', 'store',
+])->middleware(['auth']);
+Route::get('/dashboard', function () {
+    return view('dashboard')->name('dashboard');
+})->middleware(['auth']);
 Route::resource('tours', TourController::class)->only([
     'index', 'show',
 ]);
+Route::resource('admin/admintours', ListTourController::class)
+    ->middleware('role');
+
 
 Route::resource('reviews', ReviewController::class);
 
@@ -45,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('ipn_vnpay');
 
     Route::post('reviews/upload', [ReviewController::class, 'uploadImageToDir'])->name('reviews.upload');
+    Route::get('/heart', [LikeController::class, 'Like'])->name('heart');
 });
 
 
@@ -56,6 +68,8 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
-Route::resource('admin/tours', ListTourController::class);
-
 Route::get('search/', [TourController::class, 'search'])->name('search');
+
+Route::get('test', function () {
+    return view('booking.vnp_response');
+});

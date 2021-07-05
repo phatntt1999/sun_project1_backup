@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\EditProfileRequest;
 use App\Models\User;
 use App\Models\Image;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,7 +17,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
+        }
+        $avatar = $user->images->first();
+
+        return view('profile', compact('user', 'avatar'));
     }
 
     /**
@@ -48,13 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find(99);
-        if (!$user) {
-            return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
-        }
-        $avatar = $user->images->first();
-
-        return view('profile', compact('user', 'avatar'));
+        //
     }
     public function show_edit($id)
     {
@@ -66,8 +68,6 @@ class UserController extends Controller
 
         return view('edit_profile', compact('user', 'avatar'));
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -98,8 +98,8 @@ class UserController extends Controller
             $storedPath = $image->move($path, $image->getClientOriginalName());
             if (empty($avatar)) {
                 $avatar = Image::create([
-                    'object-id' => $id,
-                    'object-type' => 'users',
+                    'object_id' => $id,
+                    'object_type' => 'users',
                     'url' => $path . $name,
                 ]);
                 $avatar->save();
@@ -113,7 +113,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->get('password'));
         if ($user->save()) {
 
-            return back()->with('msg', trans('messages.save_success'));
+            return back()->with('msg', trans('messages.save_sucess'));
         }
 
         return back()->with('msg', trans('messages.save_fail'));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryTour;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Tour;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +60,7 @@ class ListTourController extends Controller
         $catTourId = $request->cat_tour_id;
         $price = $request->price;
 
-        Tour::create([
+        $createTour = Tour::create([
             'name' => $name,
             'description' => $description,
             'duration' => $duration,
@@ -67,6 +68,19 @@ class ListTourController extends Controller
             'cat_tour_id' => $catTourId,
             'price' => $price,
         ]);
+
+        if ($request->has('thumbnailTour')) {
+            $thumbnail = $request->file('thumbnailTour');
+            $path = 'assets/images/destinations/';
+            $name = $thumbnail->getClientOriginalName();
+            $storedPath = $thumbnail->move($path, $name);
+
+            Image::create([
+                'imageable_id' => $createTour->id,
+                'imageable_type' => 'tours',
+                'url' => $path . $name,
+            ]);
+        }
 
         return redirect()->route('admintours.index')->with('createSuccess', 'Create successfull');
     }

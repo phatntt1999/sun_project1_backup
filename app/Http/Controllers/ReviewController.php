@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryReview;
+use App\Models\Image;
 use App\Models\LikeReview;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::with('images')->oldest()->paginate(config('app.default_paginate_review'));
+        $reviews = Review::with('images')->latest()->paginate(config('app.default_paginate_review'));
         return view('blog', compact('reviews'));
     }
 
@@ -43,15 +44,29 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $accountId = Auth::user()->id;
-        $review = [
+
+        $reviewData = [
             "title"  =>  $request->titleReview,
             "content" => $request->contentReview,
             "account_id" => $accountId,
             "category_review_id" => $request->catReview,
             "count_like" => 0,
         ];
+        $review  =  Review::create($reviewData);
 
-        $review  =  Review::create($review);
+        if ($request->has('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $path = 'assets/images/uploads/thumbnailBlog/';
+            $name = $thumbnail->getClientOriginalName();
+            $storedPath = $thumbnail->move($path, $name);
+
+            $reviewImage = Image::create([
+                'imageable_id' => $review->id,
+                'imageable_type' => 'reviews',
+                'url' => $path . $name,
+            ]);
+        }
+
         return redirect()->route('home')->with("success", trans('messages.review_created'));
     }
 
@@ -63,6 +78,7 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
+        $catReviews = CategoryReview::all();
         $review = Review::find($id);
         if (!$review) {
             return redirect()->route('reviews.index')->with('error', trans('messages.not_found_review'));
@@ -74,7 +90,7 @@ class ReviewController extends Controller
         $likeController = new LikeController;
         $countLike = $likeController->countLike($id);
 
-        return view('single-blog', compact('review', 'images', 'user', 'liked', 'countLike'));
+        return view('single-blog', compact('review', 'images', 'user', 'liked', 'countLike', 'catReviews'));
     }
 
     /**

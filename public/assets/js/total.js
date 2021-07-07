@@ -1,4 +1,4 @@
-function updateCost(count) {
-    var ticketCost = 5.5;
-    document.getElementById("total").innerHTML = count * ticketCost;
+function updateCost(count, price) {
+    document.getElementById("total").innerHTML = '$' + price * count;
+    document.getElementById("totalPrice").value = count * price;
 }

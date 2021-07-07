@@ -44,10 +44,6 @@ class User extends Authenticatable
     {
         return $this->morphMany(Image::class, 'imageable');
     }
-    public function tours()
-    {
-        return $this->belongsToMany(Tours::class, 'BookingTour', 'id', 'id');
-    }
     public function reviews()
     {
         return $this->hasMany(Review::class, 'account_id', 'id');
@@ -55,5 +51,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class, 'account_id', 'id');
+    }
+    public function tours()
+    {
+        return $this->belongsToMany(Tour::class, 'booking_tours', 'account_id', 'tour_id')
+            ->withPivot('created_at', 'total_price', 'booking_start_date', 'quantity');
     }
 }

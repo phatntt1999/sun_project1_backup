@@ -31,13 +31,15 @@ class TourRatingLivewareController extends Controller
             ->get();
         //$comments = Rating::where('product_id', $this->product->id)->where('status', 1);
 
-        $average = $rating->abc($this->product->id);
+        $average = $rating->abc($this->review->id);
 
         $comments = [];
         for ($i = 0; $i < count($comment); $i++) {
             $commenta = (array)$comment[$i];
             array_push($comments, $commenta);
         }
+
+        dd($average);
         // dd(session()->all());
         // dd($comments);
         return view('livewire.product-ratings', compact('comments', 'average'));

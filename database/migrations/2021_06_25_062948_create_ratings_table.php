@@ -17,7 +17,7 @@ class CreateRatingsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('rating');
-            $table->tinyInteger('status_rating')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->text('comment')->nullable();
             $table->integer('tour_id');
             $table->integer('account_id');

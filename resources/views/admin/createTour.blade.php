@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <form class="well form-horizontal" action="{{ route('admintours.store') }}" method="POST" id="contact_form">
+    <form class="well form-horizontal" action="{{ route('admintours.store') }}" method="POST" enctype="multipart/form-data" id="contact_form">
         @csrf
         {{-- {{ method_field('GET') }} --}}
 
@@ -22,7 +22,7 @@
                 <div class="col-md-4 selectContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fas fa-torii-gate"></i></span>
-                        <select name="cat_tour_id" class="form-control selectpicker">
+                        <select name="cat_tour_id" required class="form-control selectpicker">
                             <option value="">Select tour category...</option>
                             @foreach ($cat_tour as $item)
                             <option value="{{ $item->id }}">{{ $item->cat_name }}</option>
@@ -38,7 +38,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fab fa-avianex"></i></span>
-                        <input name="name" placeholder="Tour Name..." class="form-control" type="text">
+                        <input name="name" required placeholder="Tour Name..." class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-pen"></i></span>
-                        <textarea class="form-control" name="description"
+                        <textarea required class="form-control" name="description"
                             placeholder="Say something about tour..."></textarea>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-business-time"></i></span>
-                        <input name="duration" placeholder="How many day is tour last?" class="form-control"
+                        <input name="duration" required placeholder="How many day is tour last?" class="form-control"
                             type="number">
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                         <input name="numOfParticipants" placeholder="Enter number of participants..."
-                            class="form-control" type="number">
+                            class="form-control" required type="number">
                     </div>
                 </div>
             </div>
@@ -84,17 +84,20 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-donate"></i></span>
-                        <input name="price" placeholder=" Enter price of tour..." class="form-control" type="number">
+                        <input name="price" required placeholder=" Enter price of tour..." class="form-control" type="number">
                     </div>
                 </div>
             </div>
 
-
-
-            {{-- <!-- Success message -->
-            <div class="alert alert-success" role="alert" id="success_message">Success <i
-                    class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you
-                shortly.</div> --}}
+            <!-- File input-->
+            <div class="form-group">
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="far fa-image"></i></span>
+                        <input type="file" required name="thumbnailTour" class="form-control">
+                    </div>
+                </div>
+            </div>
 
             <!-- Button -->
             <div class="form-group">

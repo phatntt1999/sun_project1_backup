@@ -20,7 +20,7 @@ class RoleIdentification
         if (Auth::check() && !(Auth::user()->role == 'user')) {
             return $next($request);
         } else {
-            return redirect(route('login'))->with('failMessage', 'Please login first!!!');
+            return redirect(route('home'))->with('failMessage', 'You do not have permission!!');
         }
     }
 }

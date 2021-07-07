@@ -22,12 +22,17 @@ class Tour extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
-    public function category_tour()
+    public function CategoryTour()
     {
-        return $this->belongsTo(Category_tour::class, 'id', 'id');
+        return $this->belongsTo(CategoryTour::class, 'cat_tour_id', 'id');
     }
     public function users()
     {
-        return $this->belongsToMany(User::class, 'BookingTour', 'id', 'id');
+        return $this->belongsToMany(User::class, 'booking_tours', 'tour_id', 'account_id')
+            ->withPivot('created_at', 'total_price', 'booking_start_date', 'quantity');
+    }
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'tour_id', 'id');
     }
 }

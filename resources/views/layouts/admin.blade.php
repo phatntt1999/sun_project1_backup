@@ -31,7 +31,7 @@
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('/bower_components/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Page level plugins -->
-    <script src="{{ asset('/bower_components/dataTables.bootstrap4.min.js/index.js') }}"></script>
+    {{-- <script src="{{ asset('/bower_components/dataTables.bootstrap4.min.js/index.js') }}"></script> --}}
     <!-- Table Support plugins -->
     <script src="{{ asset('/bower_components/jquery.dataTables.min/index.js') }}"></script>
 
@@ -78,8 +78,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Types:</h6>
-                        <a class="collapse-item" href="buttons.html">User Information</a>
-                        <a class="collapse-item" href="cards.html">User Review</a>
+                        <a class="collapse-item" href="{{ route('user.index') }}">User Information</a>
+                        <a class="collapse-item" href="{{ route('adminreviews.index') }}">User Review</a>
                     </div>
                 </div>
             </li>
@@ -95,8 +95,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Utilities:</h6>
-                        <a class="collapse-item" href="#">Tour Category</a>
-                        <a class="collapse-item" href="{{ route('tours.index') }}">Tour List</a>
+                        <a class="collapse-item" href="{{ route('category.index') }}">Tour Category</a>
+                        <a class="collapse-item" href="{{ route('admintours.index') }}">Tour List</a>
                     </div>
                 </div>
             </li>
@@ -109,39 +109,18 @@
                 Action
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            {{-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li> --}}
-
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{ route('revenue') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Booking</span></a>
+                    <span>Revenue</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Homepage</span></a>
             </li>
 
             <!-- Divider -->
@@ -349,7 +328,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <form method="POST" action="{{ route('logout') }}">
+                                <form method="GET" action="{{ route('logout') }}">
                                     @csrf
 
                                     <x-dropdown-link :href="route('logout')"

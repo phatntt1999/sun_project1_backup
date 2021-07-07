@@ -116,9 +116,9 @@
                         Ratings
                     </h2>
 
-                    @if ($average)
+                    @if ($avgRating)
                     <h2 class="box-border mx-0 mt-0 font-sans text-4xl font-bold text-center text-indigo-900">
-                        {{ $average }}⭐
+                        {{ round($avgRating, 2) }}⭐
                     </h2>
                     @endif
                 </div>

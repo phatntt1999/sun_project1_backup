@@ -11,7 +11,7 @@ class Rating extends Model
 
     protected $fillable = [
         'rating',
-        'status_rating',
+        'status',
         'tour_id',
         'account_id',
     ];
@@ -23,12 +23,12 @@ class Rating extends Model
 
     public function tour()
     {
-        return $this->belongsTo('App\Models\Tour');
+        return $this->belongsTo(Tour::class, 'tour_id', 'id');
     }
 
     public function getAverageRating($id)
     {
-        $Avg = Rating::all()->where('product_id', $id)->where('status', 1);
+        $Avg = Rating::all()->where('tour_id', $id)->where('status', 1);
         $average = 0;
         if ($Avg) {
             $ArrRating = [];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rating;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,6 @@ class TourController extends Controller
         $max_price = $request->input('max_price');
         $tours = Tour::with('images')->where('name', 'LIKE', '%' . $destination . '%')
             ->where('duration', 'LIKE', '%' . $duration . '%')
-            // ->whereBetween("price", [$min_price, $max_price])
             ->paginate(config('app.default_paginate_tour'));
 
         return view('destinations', compact('tours'));
@@ -69,7 +69,10 @@ class TourController extends Controller
         }
         $images = $tour->images->all();
 
-        return view('tour', compact('tour', 'images'));
+        $rating = new Rating();
+        $avgRating = $tour->avgRate;
+
+        return view('tour', compact('tour', 'images', 'avgRating'));
     }
 
     /**

@@ -14,6 +14,6 @@ class CategoryTour extends Model
     ];
     public function tours()
     {
-        return $this->hasMany(Tour::class, 'id', 'id');
+        return $this->hasMany(Tour::class, 'cat_tour_id', 'id');
     }
 }

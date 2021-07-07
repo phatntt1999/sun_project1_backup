@@ -31,10 +31,10 @@ class ProductRatings extends Component
         $rating = new Rating();
         $comment =  DB::table('ratings')
             ->join('users', 'ratings.account_id', '=', 'users.id')
+            ->where('tour_id', $this->tour->id)
             ->select('*')
             ->get();
-
-        $average = $rating->getAverageRating($this->tour->id);
+        $avgRating = $rating->getAverageRating($this->tour->id);
 
         $comments = [];
         for ($i = 0; $i < count($comment); $i++) {
@@ -42,7 +42,7 @@ class ProductRatings extends Component
             array_push($comments, $commenta);
         }
 
-        return view('livewire.product-ratings', compact('comments', 'average'));
+        return view('livewire.product-ratings', compact('comments', 'avgRating'));
     }
 
 

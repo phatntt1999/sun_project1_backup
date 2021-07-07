@@ -36,31 +36,9 @@
                             <ul class="blog-info-link mt-3 mb-4">
                                 <li><a href="#"><i class=""></i> Travel, Lifestyle</a></li>
                             </ul>
-                            <p class="excert">
-                                {{ $review->content1 }}
-                            </p>
-                            <p>
-                                {{ $review->content1 }}
-                            </p>
-                            <div class="quote-wrapper">
-                                <div class="quotes">
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get the MCSE study materials yourself at
-                                a fraction of the camp price. However, who has the willpower to actually sit through a
-                                self-imposed MCSE training.
-                                </div>
-                            </div>
-                            <p>
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                                fraction of the camp price. However, who has the willpower
-                            </p>
-                            <p>
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                                fraction of the camp price. However, who has the willpower to actually sit through a
-                                self-imposed MCSE training. who has the willpower to actually
-                            </p>
+                            <span>
+                                {!! $review->content !!}
+                            </span>
                         </div>
                     </div>
                     <div class="navigation-top">
@@ -84,6 +62,8 @@
                                         <i class="user-like">People like this</i>
                                     @endif
                                 </div>
+
+
                             </p>
                         </div>
                         <div class="navigation-area">
@@ -115,20 +95,20 @@
                         </div>
                     </div>
                     <div class="blog-author">
-                        <div class="media align-items-center">
+                        <div class="media align-items-center flex">
                             @if ($user->images->first())
-                                <img class="avatar_reply" src="{{ asset("$user->images->first()->url") }}" alt="" />
+                                <img class="avatar_reply" src="{{ asset($user->images->first()->url) }}" alt="" />
                             @else
                                 <img class="avatar_reply" src="{{ asset('/assets/images/service/default-avatar.png') }}" alt="" />
                             @endif
                             <div class="media-body">
-                                <h4>{{ $user->name }}</h4>
+                                <h3>{{ $user->name }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="comments-area">
                         <h4> {{ $review->comments->count() }} {{ trans('messages.comments') }}</h4>
-                        @include('comment_list', ['comments' => $review->comments->whereNull('comment-parent-id'), 'review_id' => $review->id])
+                        @include('comment_list', ['comments' => $review->comments->whereNull('comment_parent_id'), 'review_id' => $review->id])
                     </div>
                     <div class="comment-form">
                         <h4>{{ trans('messages.leave_reply') }}</h4>
@@ -139,7 +119,7 @@
                                 <div class="form-group">
                                     <textarea class="form-control w-100" name="content" id="comment" cols="30" rows="9"
                                         placeholder="{{ trans('messages.write_cmt') }}" required></textarea>
-                                    <input type=hidden name='review-id' value="{{ $review->id }}" />
+                                    <input type=hidden name='review_id' value="{{ $review->id }}" />
                                 </div>
                                 </div>
                             </div>
@@ -154,36 +134,19 @@
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">{{ trans('messages.category_blog') }}</h4>
                             <ul class="list cat-list">
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>{{ trans('messages.domestic_travel') }} (41)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>{{ trans('messages.national_travel') }} (12)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Modern technology (10)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Product (08)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Inspiration (11)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Health Care (19)</p>
-                                    </a>
-                                </li>
+
+                                @foreach ($catReviews as $catReview)
+                                    <?php
+                                        $count = 10;
+                                        $count += rand(1,7);
+                                    ?>
+                                    <li>
+                                        <a href="#" class="d-flex">
+                                            <p>{{ $catReview->name_rv_cat }} ({{ $count }})</p>
+                                        </a>
+                                    </li>
+
+                                @endforeach
                             </ul>
                         </aside>
                     </div>
@@ -192,7 +155,6 @@
         </div>
     </div>
 </section>
-@endsection
 <script>
     $('.content').click(function() {
         // var review_id = {{ session('review_id') }};
@@ -200,7 +162,6 @@
         $.ajax({
             type: 'GET',
             url: "{{ route('heart') }}",
-
             data: {
                 review_id: review_id,
             },
@@ -208,7 +169,7 @@
                 $('.numb').html(result);
             }
         });
-
         $('.1').toggleClass("heart-active");
     });
 </script>
+@endsection

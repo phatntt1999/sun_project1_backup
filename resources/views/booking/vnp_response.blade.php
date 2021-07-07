@@ -1,6 +1,7 @@
 @extends('layouts.app_body')
 @section('header')
 @include('header.header_user')
+@include('header.header_review')
 <!-- end:header-top -->
 @endsection
 @section('content')

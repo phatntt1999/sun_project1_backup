@@ -26,7 +26,7 @@ class EditProfileRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'email' => 'required|email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'nullable|min:8|confirmed',
             'avatar' => 'nullable|image',
         ];
     }
@@ -37,7 +37,6 @@ class EditProfileRequest extends FormRequest
             'name.max' => trans('messages.err_max'),
             'email.required' => trans('messages.err_empty'),
             'email.email' => trans('messages.err_email'),
-            'password.required' => trans('messages.err_empty'),
             'password.min' => trans('messages.err_min'),
             'password.confirmed' => trans('messages.err_confirm'),
             'avatar.image' => trans('messages.err_img'),

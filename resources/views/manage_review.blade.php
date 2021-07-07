@@ -28,16 +28,16 @@
 </div>
 @endsection
 @section('content')
-<div class="container">
+<div class="">
     @if (empty($reviews))
-        <div class="none">
+        <div class="none container">
             <div class="well">
                 <h3>{{ trans('messages.reviews_0') }}</h3>
             </div>
         </div>
     @else
         @foreach($reviews as $review)
-            <div class="none">
+            <div class="none container">
                 <div class="well">
                     <form onsubmit='return confirm("Do you want to delete this user?");' action="{{ route('reviews.destroy', $review->id) }}" method="POST">
                         {{ csrf_field() }}
@@ -49,7 +49,7 @@
                                 @endif
                             </a>
                             <div class="media-body">
-                            <a href="{{ route('reviews.show',$review->id) }}" class="media-heading">{{ $review->title }}</a>
+                            <h3><a href="{{ route('reviews.show',$review->id) }}" class="media-heading">{{ $review->title }}</a></h3>
                             <p class="text-right">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </p>

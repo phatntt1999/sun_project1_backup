@@ -13,13 +13,11 @@
             <div class="modal-body modal-body-step-1 is-showing">
                 <div class="title">{{ trans('messages.booking_form') }}</div>
                 <div class="description">
-                    <h2><b>Ha Long
-                        {{ $selectedTour->duration }} {{ trans('messages.day') }}
-                        {{ $selectedTour->duration - 1 }} {{ trans('messages.night') }}</b></h2>
+                    <h2><b>{{ $selectedTour->name }}</b></h2>
                     <h3>{{ trans('messages.price') }}: ${{ $selectedTour->price }}</h3>
                     <h4>{{ trans('messages.duration') }}:
-                        {{ $selectedTour->duration }} {{ trans('messages.day') }}
-                         {{ $selectedTour->duration - 1 }} {{ trans('messages.night') }}</h4>
+                        {{ $selectedTour->duration }} {{ trans('messages.days') }}
+                         {{ $selectedTour->duration - 1 }} {{ trans('messages.nights') }}</h4>
 
                 </div>
                 <form class="book_form" action="{{ route('storeBookingTour') }}" method="POST">
@@ -46,10 +44,3 @@
     </div>
 </div>
 @endsection
-<script>
-    function updateCost(count, price) {
-        document.getElementById("total").innerHTML = count * price;
-        document.getElementById("totalPrice").value = count * price;
-    }
-
-</script>

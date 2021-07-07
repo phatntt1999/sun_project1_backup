@@ -18,7 +18,7 @@
                     <a href="{{ route('edit_profile', $user->id) }}" class="btn btn-xs btn-primary mb-3">{{ trans('messages.edit_proflie') }}</a>
                 </div>
             </div>
-        
+
 
         <ul class="profile-header-tab nav nav-tabs">
             <li class="nav-item"><a href="{{ route('users.show', $user->id) }}" class="nav-link">{{ trans('messages.review') }}</a></li>
@@ -64,13 +64,13 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label">{{ trans('messages.new_pass') }}:</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="password" value="11111122333" name="password">
+                        <input class="form-control" type="password" placeholder="New Password..." name="password">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">{{ trans('messages.confirm_pass') }}:</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="password" value="11111122333" name="password_confirmation">
+                        <input class="form-control" type="password" placeholder="Confirm Password..." name="password_confirmation">
                     </div>
                 </div>
                 <div class="form-group">

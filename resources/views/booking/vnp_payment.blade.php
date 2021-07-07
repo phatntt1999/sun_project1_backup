@@ -35,11 +35,11 @@
                 </div>
                 <div class="form-group">
                     <label for="order_id">Mã hóa đơn</label>
-                    <input class="form-control" id="order_id" name="order_id" type="text" value="{{ $bookingId }}" disabled/>
+                    <input class="form-control" id="order_id" name="order_id" type="text" value="{{ $bookingId }}" readonly/>
                 </div>
                 <div class="form-group">
                     <label for="amount">Price</label>
-                    <input class="form-control" id="amount" name="totalPrice" type="number" value="{{ $totalPrice }}" />
+                    <input class="form-control" id="amount" name="totalPrice" type="number" value="{{ $totalPrice }}" readonly/>
                 </div>
                 <div class="form-group">
                     <label for="order_desc">Nội dung thanh toán</label>
@@ -73,8 +73,7 @@
                         <option value="VISA"> Thanh toan qua VISA/MASTER</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Popup</button>
-                <button type="submit" class="btn btn-default" id="btnSubmit">Thanh toán Redirect</button>
+                <button type="submit" class="btn btn-primary" id="btnSubmit">Thanh toán</button>
 
             </form>
         </div>

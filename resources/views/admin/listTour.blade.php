@@ -14,7 +14,7 @@
 <div class="container-fluid">
 
     @if (session('createSuccess'))
-            {{-- @include('common.error') --}}
+            @include('common.error')
             <div class="alert alert-success">
                 <i class="fa fa-thumbs-up"></i>
                 <h2>{{session('createSuccess')}}</h2>

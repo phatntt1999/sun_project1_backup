@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class BookingController extends Controller
+class ReviewManagementController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('auth');
+        $this->middleware('role');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,14 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $authId = Auth::user()->id;
+        $name = Auth::user()->name;
+        $reviews = Review::orderBy('created_at', 'asc')->get();
+
+        return view('admin.listReview', [
+            'reviews' => $reviews,
+            'name' => $name,
+        ]);
     }
 
     /**
@@ -79,6 +93,11 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $review = Review::find($id);
+        if ($review->delete()) {
+            return redirect()->route('adminreviews.index')->with('msg', trans('messages.del_sucess'));
+        }
+
+        return redirect()->route('adminreviews.index')->with('msg', trans('messages.del_fail'));
     }
 }

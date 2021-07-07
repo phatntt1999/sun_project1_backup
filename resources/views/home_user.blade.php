@@ -5,9 +5,24 @@
 @include('header.header_search')
 @endsection
 @section('content')
+
+<link rel="stylesheet" type="text/css"
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 <!-- Hot Tours -->
 <div id="fh5co-tours" class="fh5co-section-gray">
 	<div class="container">
+		<script>
+		@if(Session::has('failMessage'))
+				toastr.options =
+				{
+					"closeButton" : true,
+					"progressBar" : true
+				}
+				toastr.error("{{ session('failMessage') }}");
+		@endif
+		</script>
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
 				<h3>{{ trans('messages.hot_tour') }}</h3>
@@ -20,7 +35,7 @@
 					<div class="desc">
 						<span></span>
 						<h3>Huế</h3>
-						<span class="price">1,000,000VNĐ</span>
+						<span class="price">$555</span>
 						<a class="btn btn-primary btn-outline" href="#">{{ trans('messages.book_now') }} <i class="icon-arrow-right22"></i></a>
 					</div>
 				</div>
@@ -30,7 +45,7 @@
 					<div class="desc">
 						<span></span>
 						<h3>Đà Nẵng</h3>
-						<span class="price">1,500,000VNĐ</span>
+						<span class="price">$215</span>
 						<a class="btn btn-primary btn-outline" href="#">{{ trans('messages.book_now') }}<i class="icon-arrow-right22"></i></a>
 					</div>
 				</div>
@@ -40,7 +55,7 @@
 					<div class="desc">
 						<span></span>
 						<h3>Hội An</h3>
-						<span class="price">2,000,000VNĐ</span>
+						<span class="price">$315</span>
 						<a class="btn btn-primary btn-outline" href="#">{{ trans('messages.book_now') }}<i class="icon-arrow-right22"></i></a>
 					</div>
 				</div>

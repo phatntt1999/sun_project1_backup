@@ -20,7 +20,7 @@ class Review extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
-    public function category_review()
+    public function categoryReview()
     {
         return $this->belongsTo(CategoryReview::class, 'category_review_id', 'id');
     }

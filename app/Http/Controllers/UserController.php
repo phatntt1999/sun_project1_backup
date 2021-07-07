@@ -56,7 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::find(Auth::user()->id);
         if (!$user) {
             return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
         }
@@ -67,7 +67,7 @@ class UserController extends Controller
     }
     public function show_edit($id)
     {
-        $user = User::find($id);
+        $user = User::find(Auth::user()->id);
         if (!$user) {
             return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
         }
@@ -96,7 +96,7 @@ class UserController extends Controller
      */
     public function update(EditProfileRequest $request, $id)
     {
-        $user = User::find($id);
+        $user = User::find(Auth::user()->id);
         $avatar = $user->images->first();
         if ($request->has('avatar')) {
             $image = $request->file('avatar');
@@ -117,7 +117,10 @@ class UserController extends Controller
         }
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->password = bcrypt($request->get('password'));
+        if ($request->get('password')) {
+            $user->password = bcrypt($request->get('password'));
+        }
+
         if ($user->save()) {
 
             return back()->with('msg', trans('messages.save_sucess'));

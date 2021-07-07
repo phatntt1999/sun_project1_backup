@@ -28,7 +28,7 @@
 							<div class="desc">
 								<span></span>
 								<h3>{{ $tour->name }}</h3>
-								<span class="price">{{ number_format($tour->price) }} VNĐ</span>
+								<span class="price">$ {{ number_format($tour->price) }}</span>
 								<a class="btn btn-primary btn-outline" href="{{ route('tours.show',$tour->id) }}">{{ trans('messages.book_now') }} <i class="icon-arrow-right22"></i></a>
 							</div>
 						</div>

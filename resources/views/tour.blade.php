@@ -28,10 +28,10 @@
                               <i data-alt="4" class="icon-star-on" title="Excellent"></i>
                               <i data-alt="5" class="icon-star-on" title="Excellent"></i>
                            </span>
-                           <i>{{ $review->rating ?? '4.8'}}</i>
+                           <i>{{ $avgRating ?? '4.8'}}</i>
                         </span>
                         <span class="r-based">{{ trans('messages.base_on') }}<a href="javascript:void(0)"
-                              id="scroll-to-reviews"> 3 {{ trans('messages.reviews') }}</a></span>
+                              id="scroll-to-reviews"> {{ $tour->ratings->count() }} {{ trans('messages.reviews') }}</a></span>
                      </div>
                   </div>
                   <div class="blog_details">

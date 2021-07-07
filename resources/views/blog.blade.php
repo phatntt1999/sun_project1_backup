@@ -32,7 +32,7 @@
 									</a>
 									<p>{{ $review->content1 }}</p>
 									<ul class="blog-info-link">
-										<li><a href="#"><i class="fa fa-user"></i> {{ $review->category_review->name_rv_cat }}</a></li>
+										<li><a href="#"><i class="fa fa-user"></i> {{ $review->categoryReview->name_rv_cat }}</a></li>
 									</ul>
 								</div>
 							</article>
@@ -46,7 +46,7 @@
 					@if (Route::has('login'))
 						@auth
 							<div class="add_form">
-								<a class="btn_add" href="{{ route('reviews.create') }}">
+								<a class="btn btn-primary" href="{{ route('reviews.create') }}">
 									ADD
 								</a>
 							</div>

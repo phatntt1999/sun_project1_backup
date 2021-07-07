@@ -10,8 +10,9 @@ class CategoryReview extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name_rv_cat',
+        'name-rv-cat',
     ];
+
     public function reviews()
     {
         return $this->hasMany(Review::class, 'category_review_id', 'id');

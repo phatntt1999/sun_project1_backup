@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CategoryReview;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +19,8 @@ class DatabaseSeeder extends Seeder
             CatTourSeeder::class,
             TourSeeder::class,
             UserSeeder::class,
+            CategoryReviewSeeder::class,
+            ReviewSeeder::class,
         ]);
     }
 }

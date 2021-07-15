@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $cat_tours = CategoryTour::all();
+        $cat_tours = CategoryTour::orderBy('cat_name', 'asc')->paginate(config('app.default_paginate_category_admin'));
 
         return view('admin.listCategory', compact('cat_tours'));
     }

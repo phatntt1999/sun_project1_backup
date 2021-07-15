@@ -10,7 +10,7 @@
                         <ul class="sf-menu" id="fh5co-primary-menu">
                             <li class="active"><a href="{{ route('home') }}">{{ trans('messages.home') }}</a></li>
                             <li>
-                                <a href="{{ route('tours.index') }}" class="fh5co-sub-ddown">{{ trans('messages.destinations') }} 
+                                <a href="{{ route('tours.index') }}" class="fh5co-sub-ddown">{{ trans('messages.destinations') }}
                                     <span>&#9660;</span>
                                 </a>
                                 <ul class="fh5co-sub-menu">
@@ -78,19 +78,19 @@
                         </ul>
                     </nav>
                 </div>
-            </div>          
+            </div>
         </div>
         <div class="menu-user">
             <li class="dropdown">
-                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                     {{ trans('messages.welcome') }}, User <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="{{ route('users.show','1') }}">{{ trans('messages.manage_profile') }}</a>
+                    <a class="dropdown-item" href="{{ route('profile.show','1') }}">{{ trans('messages.manage_profile') }}</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('home') }}">{{ trans('messages.logout') }}</a>
                 </div>
             </li>
-        </div>     
+        </div>
     </header>
 </div>

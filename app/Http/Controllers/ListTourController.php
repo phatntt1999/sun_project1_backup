@@ -23,7 +23,7 @@ class ListTourController extends Controller
     public function index()
     {
         $authId = Auth::user()->name;
-        $tours = Tour::orderBy('created_at', 'asc')->get();
+        $tours = Tour::orderBy('created_at', 'asc')->paginate(config('app.default_paginate_tour'));
 
         return view('admin.listTour', [
             'tours' => $tours,

@@ -21,6 +21,7 @@
     "datatables.net-dt": "^3.2.2",
     "bootstrap-validator": "^0.11.9",
     "ckeditor": "^4.16.1",
-    "tailwindcss": "https://github.com/tailwindcss/tailwindcss.git#^2.2.4"
+    "tailwindcss": "https://github.com/tailwindcss/tailwindcss.git#^2.2.4",
+    "datatables": "DataTables#^1.10.21"
   }
 }

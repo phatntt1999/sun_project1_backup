@@ -28,6 +28,7 @@ class TourControllerTest extends TestCase
         dd($this->CatTour);
         $controller = new TourController($this->CatTour);
         $request = new Request();
+
         $view = $controller->index($request);
         $this->assertEquals('destinations', $view->name());
     }

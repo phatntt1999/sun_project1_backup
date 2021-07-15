@@ -24,6 +24,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('/bower_components/bootstrap/dist/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- Custom scripts for all pages-->
@@ -33,7 +34,7 @@
     <!-- Page level plugins -->
     {{-- <script src="{{ asset('/bower_components/dataTables.bootstrap4.min.js/index.js') }}"></script> --}}
     <!-- Table Support plugins -->
-    <script src="{{ asset('/bower_components/jquery.dataTables.min/index.js') }}"></script>
+    <script src="{{ asset('/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 
 </head>
 

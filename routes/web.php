@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
         'index', 'show', 'store',
     ])->middleware(['auth']);
 
-    Route::resource('users', UserController::class)->only([
+    Route::resource('profile', UserController::class)->only([
         'index', 'show', 'store', 'update',
     ]);
 });

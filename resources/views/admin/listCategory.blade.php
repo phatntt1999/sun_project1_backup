@@ -60,21 +60,13 @@
                                 <a href="{{ route('category.edit', $cat_tour->id) }}" class="btn btn-info btn-circle btn-edit">
                                     <i class="fas fa-pen"></i>
                                 </a>
-                                {{-- <form action="{{ route('category.destroy', $cat_tour->id) }}" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-
-                                    <button type="submit" class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form> --}}
-
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+            {{ $cat_tours->fragment('table')->links() }}
         </div>
     </div>
 

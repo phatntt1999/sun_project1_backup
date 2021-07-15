@@ -22,23 +22,19 @@ class BookingTourController extends Controller
     }
     public function storeBookingTour(Request $request)
     {
-        $tourId = $request->tourId;
         $accountId = Auth::user()->id;
         $inputDateStart = strtotime($request->dateStart);
         $dateStart = date('Y-m-d', $inputDateStart);
-        $totalPrice = $request->totalPrice;
         $status = 0;
-        $quantity = $request->quantity;
-        $duration = $request->duration;
 
         $storeDataBooking = BookingTour::create([
-            'tour_id' => $tourId,
+            'tour_id' => $request->tourId,
             'account_id' => $accountId,
-            'duration' => $duration,
-            'total_price' => $totalPrice,
+            'duration' => $request->duration,
+            'total_price' => $request->totalPrice,
             'booking_start_date' => $dateStart,
             'status' => $status,
-            'quantity' => $quantity,
+            'quantity' => $request->quantity,
         ]);
 
         return view('booking.vnp_payment', [

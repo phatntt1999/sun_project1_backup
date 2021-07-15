@@ -169,7 +169,7 @@
                                         <span>&#9660;</span>
                                     </a>
                                     <ul class="fh5co-sub-menu">
-                                        <li><a href="{{ route('users.index') }}">{{ trans('messages.per_info') }}</a></li>
+                                        <li><a href="{{ route('profile.index') }}">{{ trans('messages.per_info') }}</a></li>
                                         <li><a href="{{ route('logout') }}">{{ trans('messages.logout') }}</a></li>
                                     </ul>
                                 </li>

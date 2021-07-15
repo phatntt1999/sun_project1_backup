@@ -14,11 +14,11 @@
 <div class="container-fluid">
 
     @if (session('createSuccess'))
-            @include('common.error')
-            <div class="alert alert-success">
-                <i class="fa fa-thumbs-up"></i>
-                <h2>{{session('createSuccess')}}</h2>
-            </div>
+        @include('common.error')
+        <div class="alert alert-success">
+            <i class="fa fa-thumbs-up"></i>
+            <h2>{{session('createSuccess')}}</h2>
+        </div>
     @endif
 
 
@@ -83,6 +83,7 @@
                             </td>
                         </tr>
                         @endforeach
+                        {{ $tours->fragment('table')->links() }}
                     </tbody>
                 </table>
             </div>

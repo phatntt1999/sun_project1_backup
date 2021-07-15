@@ -21,8 +21,8 @@
 
 
         <ul class="profile-header-tab nav nav-tabs">
-            <li class="nav-item"><a href="{{ route('users.show', $user->id) }}" class="nav-link">{{ trans('messages.review') }}</a></li>
-            <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link active show">{{ trans('messages.about') }}</a></li>
+            <li class="nav-item"><a href="{{ route('profile.show', $user->id) }}" class="nav-link">{{ trans('messages.review') }}</a></li>
+            <li class="nav-item"><a href="{{ route('profile.index') }}" class="nav-link active show">{{ trans('messages.about') }}</a></li>
         </ul>
     </div>
 </div>
@@ -31,7 +31,7 @@
 <div class="profile-container-edit">
     <h1>{{ trans('messages.edit_proflie') }}</h1>
     <hr>
-    <form class="form-horizontal" action="{{ route('users.update',$user->id) }}" method="POST" role="form" enctype="multipart/form-data">
+    <form class="form-horizontal" action="{{ route('profile.update',$user->id) }}" method="POST" role="form" enctype="multipart/form-data">
         {{ csrf_field() }}
         {{ method_field('put') }}
         <div class="row">

@@ -22,7 +22,7 @@
 
         <ul class="profile-header-tab nav nav-tabs">
             <li class="nav-item"><a href="#profile-post" class="nav-link active show">{{ trans('messages.review') }}</a></li>
-            <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">{{ trans('messages.about') }}</a></li>
+            <li class="nav-item"><a href="{{ route('profile.index') }}" class="nav-link">{{ trans('messages.about') }}</a></li>
         </ul>
     </div>
 </div>

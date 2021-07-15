@@ -71,7 +71,7 @@ class CreatePaymentController extends Controller
             $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array(
-            'code' => '00', 'message' => 'success', 'data' => $vnp_Url, 'dataIpn' => $vnp_ipnUrl,
+            'code' => '00', 'message' => 'success', 'data' => $vnp_Url,
         );
         echo json_encode($returnData);
     }

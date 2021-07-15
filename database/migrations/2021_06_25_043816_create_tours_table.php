@@ -21,7 +21,7 @@ class CreateToursTable extends Migration
             $table->integer('duration');
             $table->integer('num_of_participants');
             $table->integer('cat_tour_id');
-            $table->float('avgRate', 3, 2)->default(0);
+            $table->float('rating')->nullable();
             $table->integer('price');
         });
     }

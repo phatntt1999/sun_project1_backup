@@ -17,8 +17,11 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title');
-            $table->longText('content');
+            $table->string('content1');
+            $table->string('content2')->nullable();
+            $table->string('content3')->nullable();
             $table->integer('count_like')->default(0);
+            $table->boolean('status_public')->default(true);
             $table->integer('account_id');
             $table->integer('category_review_id');
         });

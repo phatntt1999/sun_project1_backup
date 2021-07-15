@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryReviewsTable extends Migration
+class AddDurationToBookingToursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateCategoryReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_reviews', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name_rv_cat');
+        Schema::table('booking_tours', function (Blueprint $table) {
+            $table->integer('duration');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateCategoryReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_reviews');
+        Schema::table('booking_tours', function (Blueprint $table) {
+            $table->dropColumn('duration');
+        });
     }
 }

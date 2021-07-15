@@ -1,4 +1,4 @@
-@extends('layouts.app_body')	
+@extends('layouts.app_body')
 @section('header')
 @include('header.header_user')
 <!-- end:header-top -->
@@ -22,7 +22,7 @@
         </div>
 
         <ul class="profile-header-tab nav nav-tabs">
-            <li class="nav-item"><a href="{{ route('users.show',$user->id) }}" class="nav-link">{{ trans('messages.review') }}</a></li>
+            <li class="nav-item"><a href="{{ route('profile.show',$user->id) }}" class="nav-link">{{ trans('messages.review') }}</a></li>
             <li class="nav-item"><a href="#profile-about" class="nav-link active show">{{ trans('messages.about') }}</a></li>
         </ul>
     </div>

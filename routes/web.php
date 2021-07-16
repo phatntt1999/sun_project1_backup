@@ -59,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
     ])->middleware(['auth']);
 
     Route::resource('profile', UserController::class)->only([
-        'index', 'show', 'store', 'update',
+        'index', 'show', 'store', 'update', 'edit'
     ]);
 });
 

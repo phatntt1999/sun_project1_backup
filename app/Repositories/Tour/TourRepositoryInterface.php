@@ -6,6 +6,5 @@ use App\Repositories\RepositoryInterface;
 
 interface TourRepositoryInterface extends RepositoryInterface
 {
-    //ví dụ: lấy 5 sản phầm đầu tiên
-    public function getTour();
+    public function search($destination, $duration);
 }

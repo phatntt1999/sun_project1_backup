@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Rating;
 use App\Models\Tour;
+use App\Repositories\Tour\TourRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TourController extends Controller
 {
+    protected $tourRepo;
+
+    public function __construct(TourRepositoryInterface $tourRepo)
+    {
+        $this->tourRepo = $tourRepo;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +24,7 @@ class TourController extends Controller
      */
     public function index()
     {
-        $tours = Tour::with('images')->oldest()->paginate(config('app.default_paginate_tour'));
+        $tours = $this->tourRepo->sortAndPaginate('created_at', 'asc', config('app.default_paginate_tour'));
         return view('destinations', [
             'tours' => $tours,
         ]);
@@ -26,11 +34,7 @@ class TourController extends Controller
     {
         $destination = $request->input('destination');
         $duration = $request->input('duration');
-        $min_price = $request->input('min_price');
-        $max_price = $request->input('max_price');
-        $tours = Tour::with('images')->where('name', 'LIKE', '%' . $destination . '%')
-            ->where('duration', 'LIKE', '%' . $duration . '%')
-            ->paginate(config('app.default_paginate_tour'));
+        $tours = $this->tourRepo->search($destination, $duration);
 
         return view('destinations', compact('tours'));
     }
@@ -43,13 +47,12 @@ class TourController extends Controller
      */
     public function show($id)
     {
-        $tour = Tour::find($id);
+        $tour = $this->tourRepo->find($id);
+
         if (!$tour) {
             return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
         }
         $images = $tour->images->all();
-
-        $rating = new Rating();
         $avgRating = $tour->avgRate;
 
         return view('tour', compact('tour', 'images', 'avgRating'));

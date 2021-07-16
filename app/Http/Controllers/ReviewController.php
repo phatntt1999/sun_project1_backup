@@ -6,11 +6,27 @@ use App\Models\CategoryReview;
 use App\Models\Image;
 use App\Models\LikeReview;
 use App\Models\Review;
+use App\Repositories\Image\ImageRepositoryInterface;
+use App\Repositories\Review\ReviewRepositoryInterface;
+use App\Repositories\ReviewCategory\CatReviewRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
+    protected $reviewRepo;
+    protected $catReviewRepo;
+    protected $imageRepo;
+
+    public function __construct(
+        ReviewRepositoryInterface $reviewRepo,
+        CatReviewRepositoryInterface $catReviewRepo,
+        ImageRepositoryInterface $imageRepo
+    ) {
+        $this->reviewRepo = $reviewRepo;
+        $this->catReviewRepo = $catReviewRepo;
+        $this->imageRepo = $imageRepo;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +34,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::with('images')->latest()->paginate(config('app.default_paginate_review'));
+        $reviews = $this->reviewRepo->getReviewWithImage();
+
         return view('blog', compact('reviews'));
     }
 
@@ -29,7 +46,7 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        $catReview = CategoryReview::all();
+        $catReview = $this->catReviewRepo->getAll();
         return view('createReview', [
             'catReview' => $catReview,
         ]);
@@ -43,16 +60,16 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $accountId = Auth::user()->id;
+        $currentUser = $this->reviewRepo->getCurrentUser();
 
-        $reviewData = [
+        $attributes = [
             "title"  =>  $request->titleReview,
             "content" => $request->contentReview,
-            "account_id" => $accountId,
+            "account_id" => $currentUser->id,
             "category_review_id" => $request->catReview,
             "count_like" => 0,
         ];
-        $review  =  Review::create($reviewData);
+        $newReview = $this->reviewRepo->create($attributes);
 
         if ($request->has('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
@@ -60,11 +77,12 @@ class ReviewController extends Controller
             $name = $thumbnail->getClientOriginalName();
             $storedPath = $thumbnail->move($path, $name);
 
-            $reviewImage = Image::create([
-                'imageable_id' => $review->id,
+            $attributesImage = [
+                'imageable_id' => $newReview->id,
                 'imageable_type' => 'reviews',
                 'url' => $path . $name,
-            ]);
+            ];
+            $this->imageRepo->create($attributesImage);
         }
 
         return redirect()->route('home')->with("success", trans('messages.review_created'));
@@ -78,8 +96,8 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        $catReviews = CategoryReview::all();
-        $review = Review::find($id);
+        $catReviews = $this->catReviewRepo->getAll();
+        $review = $this->reviewRepo->find($id);
         if (!$review) {
             return redirect()->route('reviews.index')->with('error', trans('messages.not_found_review'));
         }
@@ -101,7 +119,7 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        $review = Review::find($id);
+        $review = $this->reviewRepo->find($id);
         if (!$review) {
             return redirect()->route('reviews.index')->with('error', trans('messages.not_found_review'));
         }

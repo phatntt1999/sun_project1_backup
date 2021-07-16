@@ -22,8 +22,10 @@
 										<img class="card-img rounded-0" src="assets/images/destinations/NotFound.png" alt="">
 									@endif
 									<a href="#" class="blog_item_date">
-										<h3>15</h3>
-										<p>Jan</p>
+										<center>
+											<h3>{{ $postDate = $review->created_at->day }}</h3>
+											<p>{{ $postDate = $review->created_at->format('F') }}</p>
+										</center>
 									</a>
 								</div>
 								<div class="blog_details">

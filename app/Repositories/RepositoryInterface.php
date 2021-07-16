@@ -11,6 +11,20 @@ interface RepositoryInterface
     public function getAll();
 
     /**
+     * Get all and paginate
+     * @param  int  $paginate
+     * @return mixed
+     */
+    public function getAllAndPaginate($paginate);
+
+    /**
+     * Sort and paginate
+     * @param  int  $paginate
+     * @return mixed
+     */
+    public function sortAndPaginate($colum, $orderBy, $paginate);
+
+    /**
      * Get one
      * @param $id
      * @return mixed
@@ -38,4 +52,10 @@ interface RepositoryInterface
      * @return mixed
      */
     public function delete($id);
+
+    /**
+     * Get user who is loged in
+     * @return mixed
+     */
+    public function getCurrentUser();
 }

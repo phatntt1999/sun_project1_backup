@@ -6,10 +6,21 @@ use Illuminate\Http\Request;
 use App\Http\Requests\EditProfileRequest;
 use App\Models\User;
 use App\Models\Image;
+use App\Repositories\Image\ImageRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\User\UserRepositoryInterface;
 
 class UserController extends Controller
 {
+    protected $userRepo;
+    protected $imageRepo;
+
+    public function __construct(UserRepositoryInterface $userRepo, ImageRepositoryInterface $imageRepo)
+    {
+        $this->userRepo = $userRepo;
+        $this->imageRepo = $imageRepo;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,35 +28,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
-        }
+        $user = $this->userRepo->getCurrentUser();
         $avatar = $user->images->first();
 
         return view('profile', compact('user', 'avatar'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -56,24 +42,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find(Auth::user()->id);
-        if (!$user) {
-            return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
-        }
+        $user = $this->userRepo->getCurrentUser();
         $reviews = $user->reviews->all();
         $avatar = $user->images->first();
 
         return view('manage_review', compact('user', 'reviews', 'avatar'));
-    }
-    public function show_edit($id)
-    {
-        $user = User::find(Auth::user()->id);
-        if (!$user) {
-            return redirect()->route('tours.index')->with('error', trans('messages.not_found_tour'));
-        }
-        $avatar = $user->images->first();
-
-        return view('edit_profile', compact('user', 'avatar'));
     }
 
     /**
@@ -84,7 +57,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->userRepo->getCurrentUser();
+        $avatar = $user->images->first();
+
+        return view('edit_profile', compact('user', 'avatar'));
     }
 
     /**
@@ -96,7 +72,7 @@ class UserController extends Controller
      */
     public function update(EditProfileRequest $request, $id)
     {
-        $user = User::find(Auth::user()->id);
+        $user = $this->userRepo->getCurrentUser();
         $avatar = $user->images->first();
         if ($request->has('avatar')) {
             $image = $request->file('avatar');
@@ -104,39 +80,31 @@ class UserController extends Controller
             $name = $image->getClientOriginalName();
             $storedPath = $image->move($path, $image->getClientOriginalName());
             if (empty($avatar)) {
-                $avatar = Image::create([
+                $attributesAvatar = [
                     'imageable_id' => $id,
                     'imageable_type' => 'users',
                     'url' => $path . $name,
-                ]);
-                $avatar->save();
+                ];
+                $this->imageRepo->create($attributesAvatar);
             } else {
                 $avatar->url =  $path . $name;
                 $avatar->save();
             }
         }
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        if ($request->get('password')) {
-            $user->password = bcrypt($request->get('password'));
+        if ($request->has('password')) {
+            $password = bcrypt($request->get('password'));
+            $attributes = [
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => $password,
+            ];
         }
-
-        if ($user->save()) {
-
+        dd($attributes);
+        $result = $this->userRepo->update($user->id, $attributes);
+        if ($result) {
             return back()->with('msg', trans('messages.save_sucess'));
         }
 
         return back()->with('msg', trans('messages.save_fail'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

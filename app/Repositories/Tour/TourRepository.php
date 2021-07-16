@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Repositories\Post;
+namespace App\Repositories\Tour;
 
+use App\Models\Tour;
 use App\Repositories\BaseRepository;
 use App\Repositories\Tour\TourRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class TourRepository extends BaseRepository implements TourRepositoryInterface
 {
-    //lấy model tương ứng
-    public function getModel()
+    public function __construct(Tour $tour)
     {
-        return \App\Models\Tour::class;
+        parent::__construct($tour);
     }
 
-    public function getTour()
+    public function search($destination, $duration)
     {
-        return $this->model->select('product_name')->take(5)->get();
+        $tours = $this->model::with('images')->where('name', 'LIKE', '%' . $destination . '%')
+            ->where('duration', 'LIKE', '%' . $duration . '%')
+            ->paginate(config('app.default_paginate_tour'));
+        return $tours;
     }
 }

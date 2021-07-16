@@ -2,7 +2,7 @@
 @section('header')
 @include('header.header_user')
 <!-- end:header-top -->
-<div class="fh5co-hero-review" style="height: 400px;">
+<div class="fh5co-hero-review">
     <div class="profile-header">
         <div class="profile-header-cover"></div>
 
@@ -16,7 +16,7 @@
             </div>
             <div class="profile-header-info">
                 <h4 class="m-t-sm">{{ $user->name }}</h4>
-                <a href="{{ route('edit_profile', $user->id) }}" class="btn btn-xs btn-primary mb-3">{{ trans('messages.edit_proflie') }}</a>
+                <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-xs btn-primary mb-3">{{ trans('messages.edit_proflie') }}</a>
             </div>
         </div>
 

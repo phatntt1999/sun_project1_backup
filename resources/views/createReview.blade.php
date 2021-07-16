@@ -6,14 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ asset("bower_components/bootstrap/dist/css/bootstrap.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/css/create-review.css") }}">
+    <link rel="stylesheet" href="{{ asset("assets/css/tour.css") }}">
     <link rel="stylesheet" href="{{ asset('/bower_components/font-awesome/css/all.css') }}">
     {{-- CKEditor CDN --}}
     <script src="{{ asset("bower_components/ckeditor/ckeditor.js") }}"></script>
 </head>
 
 <body>
-    <h1 class="title">Them review</h1>
+    <h1 class="title">Create review</h1>
     <!-- Text Name input-->
     <form action="{{ route('reviews.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -22,7 +22,7 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fas fa-torii-gate"></i></span>
                     <select name="catReview" class="form-control selectpicker">
-                        <option value="">Select review category</option>
+                        <option value="1">Select review category</option>
                         @foreach ($catReview as $item)
                             <option value="{{ $item->id }}">{{ $item->name_rv_cat }}</option>
                         @endforeach
@@ -35,7 +35,7 @@
             <div class="col-md-4 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fab fa-avianex"></i></span>
-                    <input name="titleReview" placeholder="Title Review..." class="form-control" type="text">
+                    <input name="titleReview" placeholder="Title Review..." class="form-control" type="text" required>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="col-md-4 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="far fa-image"></i></span>
-                    <input type="file" name="thumbnail" class="form-control">
+                    <input type="file" name="thumbnail" class="form-control" required>
                 </div>
             </div>
         </div>

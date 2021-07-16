@@ -17,7 +17,7 @@
 
             <div class="profile-header-info">
                 <h4 class="m-t-sm">{{ $user->name }}</h4>
-                <a href="{{ route('edit_profile', $user->id) }}" class="btn btn-xs btn-primary mb-3">{{ trans('messages.edit_proflie') }}</a>
+                <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-xs btn-primary mb-3">{{ trans('messages.edit_proflie') }}</a>
             </div>
         </div>
 

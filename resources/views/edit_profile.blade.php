@@ -15,7 +15,7 @@
                 </div>
                 <div class="profile-header-info">
                     <h4 class="m-t-sm">{{ $user->name }}</h4>
-                    <a href="{{ route('edit_profile', $user->id) }}" class="btn btn-xs btn-primary mb-3">{{ trans('messages.edit_proflie') }}</a>
+                    <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-xs btn-primary mb-3">{{ trans('messages.edit_proflie') }}</a>
                 </div>
             </div>
 
@@ -52,13 +52,13 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">{{ trans('messages.username') }}:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" value="{{ $user->name }}" name="name">
+                        <input class="form-control" type="text" value="{{ $user->name }}" name="name" readonly>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Email:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" value="{{ $user->email }}" name="email">
+                        <input class="form-control" type="text" value="{{ $user->email }}" name="email" readonly>
                     </div>
                 </div>
                 <div class="form-group">

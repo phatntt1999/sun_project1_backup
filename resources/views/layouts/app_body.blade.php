@@ -24,11 +24,12 @@
 	<!-- Styles-->
 	<link rel="stylesheet" href="{{ mix('/assets/css/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('/assets/css/header.css') }}">
-	<link rel="stylesheet" href="{{ asset('/assets/css/bookingform.css') }}">
+	<link rel="stylesheet" href="{{ asset('/assets/css/bookingForm.css') }}">
 	<link rel="stylesheet" href="{{ mix('/assets/css/style2.css') }}">
 	<link rel="stylesheet" href="{{ mix('/assets/css/superfish.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/custom-heart.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/tour.css') }}">
 	<link rel="stylesheet" href="{{ asset('/bower_components/icomoon-bower/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('/bower_components/font-awesome/css/all.css') }}">
 
@@ -73,7 +74,7 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="box-testimony animate-box">
+				<div class="box-testimony animate-box last-comment">
 					<blockquote>
 						<span class="quote"><span><i class="icon-quote-right"></i></span></span>
 						<p>{{ trans('messages.feedback3') }}</p>

@@ -3,40 +3,52 @@
 namespace App\Repositories;
 
 use App\Repositories\RepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
+use function PHPUnit\Framework\isEmpty;
 
 abstract class BaseRepository implements RepositoryInterface
 {
-    //model muốn tương tác
     protected $model;
 
-    //khởi tạo
-    public function __construct()
+    public function __construct(Model $model)
     {
-        $this->setModel();
-    }
-
-    //lấy model tương ứng
-    abstract public function getModel();
-
-    /**
-     * Set model
-     */
-    public function setModel()
-    {
-        $this->model = app()->make(
-            $this->getModel()
-        );
+        $this->model = $model;
     }
 
     public function getAll()
     {
-        return $this->model->all();
+        return $this->model::All();
+    }
+
+    public function getAllAndPaginate($paginate)
+    {
+        return $this->model->paginate($paginate);
+    }
+
+    public function sortAndPaginate($colum, $orderBy, $paginate)
+    {
+        try {
+            if (!(empty($colum))  && !(empty($orderBy) && !(empty($paginate)))) {
+                return $this->model->orderBy($colum, $orderBy)->paginate($paginate);
+            }
+        } catch (\Throwable $e) {
+            throw new \Exception('Query is null');
+        }
     }
 
     public function find($id)
     {
-        $result = $this->model->find($id);
+        try {
+            $result = $this->model->find($id);
+        } catch (ModelNotFoundException $exception) {
+            Log::debug("Id not found");
 
+            return false;
+        }
         return $result;
     }
 
@@ -52,7 +64,6 @@ abstract class BaseRepository implements RepositoryInterface
             $result->update($attributes);
             return $result;
         }
-
         return false;
     }
 
@@ -66,5 +77,10 @@ abstract class BaseRepository implements RepositoryInterface
         }
 
         return false;
+    }
+
+    public function getCurrentUser()
+    {
+        return Auth::user();
     }
 }

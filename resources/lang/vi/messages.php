@@ -99,6 +99,8 @@ return [
     'err_confirm' => 'Mật khẩu xác nhận không trùng khớp.',
     'save_failed' => 'Lưu không thành công.',
     'save_sucess' => 'Lưu thành công.',
+    'delete_fail' => 'Xóa không thành công',
+    'delete_sucess' => 'Đã xóa thành công!',
     'welcome' => 'Xin chào',
     'manage_profile' => 'Quản Lý Thông Tin',
     'logout' => 'Thoát',
@@ -131,6 +133,12 @@ return [
     'national_travel' => 'Du lịch nước ngoài',
     'per_info' => 'Thông tin cá nhân',
     'profile' => 'Cá nhân',
-    'del_failed' => 'Xóa không thành công.',
-    'del_sucess' => 'Xóa thành công.',
+    'createSuccess' => 'Tạo thành công',
+    'deleteSuccess' => 'Xóa thành công',
+    'deleteFail' => 'Xóa thất bại',
+    'updateSuccess' => 'Cập nhật thành công',
+    'quotes' => 'Chương trình đào tạo MCSE có những người ủng hộ và những người gièm pha.
+    Một số người không hiểu tại sao bạn phải chi tiền cho chương trình đào tạo khi
+    bạn có thể tự nhận tài liệu học MCSE với giá chỉ bằng một phần nhỏ của chương trình đào tạo.
+    Tuy nhiên, ai có đủ ý chí để thực sự ngồi qua một khóa đào tạo MCSE tự áp đặt.',
 ];

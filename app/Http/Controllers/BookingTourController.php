@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\BookingTour;
 use App\Models\Tour;
+use App\Repositories\BookingTour\BookingRepositoryInterface;
+use App\Repositories\Tour\TourRepositoryInterface;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,10 +13,21 @@ use Illuminate\Support\Facades\Date;
 
 class BookingTourController extends Controller
 {
+    protected $tourRepo;
+    protected $bookingRepo;
+
+    public function __construct(TourRepositoryInterface $tourRepo, BookingRepositoryInterface $bookingRepo)
+    {
+        $this->tourRepo = $tourRepo;
+        $this->bookingRepo = $bookingRepo;
+    }
+
     public function showBookingTour(Request $request)
     {
-        $user = Auth::user();
-        $selectedTour = Tour::find($request->tour);
+        $user = $this->tourRepo->getCurrentUser();
+        // $selectedTour = Tour::find($request->tour);
+        $selectedTour = $this->tourRepo->find($request->tour);
+
         return view('booking.booking_form', [
             'user' => $user,
             'selectedTour' => $selectedTour,
@@ -22,12 +35,12 @@ class BookingTourController extends Controller
     }
     public function storeBookingTour(Request $request)
     {
-        $accountId = Auth::user()->id;
+        $accountId = $this->tourRepo->getCurrentUser()->id;
         $inputDateStart = strtotime($request->dateStart);
         $dateStart = date('Y-m-d', $inputDateStart);
         $status = 0;
 
-        $storeDataBooking = BookingTour::create([
+        $dataBooking = [
             'tour_id' => $request->tourId,
             'account_id' => $accountId,
             'duration' => $request->duration,
@@ -35,11 +48,13 @@ class BookingTourController extends Controller
             'booking_start_date' => $dateStart,
             'status' => $status,
             'quantity' => $request->quantity,
-        ]);
+        ];
+
+        $bookingResult = $this->bookingRepo->create($dataBooking);
 
         return view('booking.vnp_payment', [
-            'totalPrice' => $storeDataBooking->total_price,
-            'bookingId' => $storeDataBooking->id,
+            'totalPrice' => $bookingResult->total_price,
+            'bookingId' => $bookingResult->id,
         ]);
     }
 }

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    protected $repo;
     public function __construct()
     {
-        // $this->middleware('auth');
         $this->middleware('role');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,12 +21,16 @@ class AdminController extends Controller
      */
     public function index()
     {
+        //$currentUser = $this->repo->getCurrentUser();
+
+        // $authId = $currentUser->id;
+        // $authName = $currentUser->name;
         $authId = Auth::user()->id;
-        $name = Auth::user()->name;
+        $authName = Auth::user()->name;
 
         return view('admin.dashboard', [
             'authId' => $authId,
-            'name' => $name,
+            'name' => $authName,
         ]);
     }
 }

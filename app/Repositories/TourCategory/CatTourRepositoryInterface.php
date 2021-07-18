@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\CatTour;
+namespace App\Repositories\TourCategory;
 
 use App\Repositories\RepositoryInterface;
 

@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Repositories\Image\ImageRepositoryInterface;
+use App\Repositories\Review\ReviewRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewManagementController extends Controller
 {
-    public function __construct()
+    protected $reviewRepo;
+    protected $imageRepo;
+    public function __construct(ReviewRepositoryInterface $reviewRepo, ImageRepositoryInterface $imageRepo)
     {
-        // $this->middleware('auth');
-        $this->middleware('role');
+        $this->reviewRepo = $reviewRepo;
+        $this->imageRepo = $imageRepo;
     }
     /**
      * Display a listing of the resource.
@@ -20,69 +24,12 @@ class ReviewManagementController extends Controller
      */
     public function index()
     {
-        $authId = Auth::user()->id;
-        $name = Auth::user()->name;
-        $reviews = Review::orderBy('created_at', 'asc')->get();
-
+        $name = $this->reviewRepo->getCurrentUser()->name;
+        $reviews = $this->reviewRepo->sortAndPaginate('created_at', 'asc', config('app.default_paginate_review'));
         return view('admin.listReview', [
             'reviews' => $reviews,
             'name' => $name,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -93,11 +40,22 @@ class ReviewManagementController extends Controller
      */
     public function destroy($id)
     {
-        $review = Review::find($id);
-        if ($review->delete()) {
-            return redirect()->route('adminreviews.index')->with('msg', trans('messages.del_sucess'));
+        $deleteReview = false;
+        $reviewImage = $this->reviewRepo->find($id)->images->all();
+        if (!empty($reviewImage)) {
+            $deleteImage = $this->imageRepo->deleteImage($reviewImage);
+            if ($deleteImage) {
+                $deleteReview = $this->reviewRepo->delete($id);
+            }
+            if ($deleteReview) {
+                return redirect()->route('adminreviews.index')->with('msg_success', trans('messages.delete_sucess'));
+            }
+        } else {
+            $deleteReview = $this->reviewRepo->delete($id);
+            if ($deleteReview) {
+                return redirect()->route('adminreviews.index')->with('msg_success', trans('messages.delete_sucess'));
+            }
         }
-
-        return redirect()->route('adminreviews.index')->with('msg', trans('messages.del_fail'));
+        return redirect()->route('adminreviews.index')->with('msg_fail', trans('messages.delete_fail'));
     }
 }

@@ -3,16 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Repositories\Image\ImageRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserManagementController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware('auth');
-        $this->middleware('role');
+    protected $userRepo;
+    protected $imageRepo;
+    public function __construct(
+        UserRepositoryInterface $userRepo,
+        ImageRepositoryInterface $imageRepo
+    ) {
+        $this->userRepo = $userRepo;
+        $this->imageRepo = $imageRepo;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,45 +27,14 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        $name = Auth::user()->name;
+        $name = $this->userRepo->getCurrentUser()->name;
         $users = User::orderBy('created_at', 'asc')->get();
+        $users = $this->userRepo->sortAndPaginate('name', 'asc', config('app.default_paginate_user'));
 
         return view('admin.listUser', [
             'users' => $users,
             'name' => $name,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -85,20 +61,17 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $name = $request->name;
-        $email = $request->email;
-        $role = $request->role;
-
-        $user = User::find($id);
-        $user->name = $name;
-        $user->email =  $email;
-        $user->role = $role;
-        if ($user->save()) {
-
-            return redirect()->route('user.index')->with('msg', trans('messages.save_sucess'));
+        $userAttributes = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+        ];
+        $updateUser = $this->userRepo->update($id, $userAttributes);
+        if ($updateUser->save()) {
+            return redirect()->route('user.index')->with('msg_success', trans('messages.save_sucess'));
         }
 
-        return redirect()->route('user.index')->with('msg', trans('messages.save_fail'));
+        return redirect()->route('user.index')->with('msg_fail', trans('messages.save_fail'));
     }
 
     /**
@@ -109,11 +82,23 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        if ($user->delete()) {
-            return redirect()->route('user.index')->with('msg', trans('messages.del_sucess'));
+        $deleteUser = false;
+        $avatarUser = $this->userRepo->find($id)->images->all();
+        if (!empty($avatarUser)) {
+            $imageRepo = $this->imageRepo->deleteImage($avatarUser);
+            if ($imageRepo) {
+                $deleteUser = $this->userRepo->delete($id);
+            }
+            if ($deleteUser) {
+                return redirect()->route('user.index')->with('msg_success', trans('messages.delete_sucess'));
+            }
+        } else {
+            $deleteUser = $this->userRepo->delete($id);
+            if ($deleteUser) {
+                return redirect()->route('user.index')->with('msg_success', trans('messages.delete_sucess'));
+            }
         }
 
-        return redirect()->route('user.index')->with('msg', trans('messages.del_fail'));
+        return redirect()->route('user.index')->with('msg_fail', trans('messages.delete_fail'));
     }
 }

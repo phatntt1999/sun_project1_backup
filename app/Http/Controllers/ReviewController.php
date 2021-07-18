@@ -119,16 +119,23 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        $review = $this->reviewRepo->find($id);
-        if (!$review) {
-            return redirect()->route('reviews.index')->with('error', trans('messages.not_found_review'));
+        $deleteReview = false;
+        $reviewImage = $this->reviewRepo->find($id)->images->all();
+        if (!empty($reviewImage)) {
+            $deleteImage = $this->imageRepo->deleteImage($reviewImage);
+            if ($deleteImage) {
+                $deleteReview = $this->reviewRepo->delete($id);
+            }
+            if ($deleteReview) {
+                return redirect()->back()->with('msg_success', trans('messages.delete_sucess'));
+            }
+        } else {
+            $deleteReview = $this->reviewRepo->delete($id);
+            if ($deleteReview) {
+                return redirect()->back()->with('msg_success', trans('messages.delete_sucess'));
+            }
         }
-        if ($review->delete()) {
-
-            return back()->with('msg', trans('messages.save_sucess'));
-        }
-
-        return back()->with('msg', trans('messages.save_fail'));
+        return redirect()->back()->with('msg_fail', trans('messages.delete_fail'));
     }
 
     /**

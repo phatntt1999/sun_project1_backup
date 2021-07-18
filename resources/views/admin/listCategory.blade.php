@@ -12,16 +12,6 @@
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-    @if (session('createSuccess'))
-            {{-- @include('common.error') --}}
-            <div class="alert alert-success">
-                <i class="fa fa-thumbs-up"></i>
-                <h2>{{session('createSuccess')}}</h2>
-            </div>
-    @endif
-
-
     <!-- DataTales Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">

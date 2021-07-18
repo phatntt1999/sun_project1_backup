@@ -97,8 +97,10 @@ return [
     'err_email' => 'Not valid email format.',
     'err_min' => 'Password must be at least 8 characters.',
     'err_confirm' => 'Confirm password must be equal to password.',
-    'save_failed' => 'Save Failed!',
+    'save_fail' => 'Save Failed!',
     'save_sucess' => 'Save Successfully!',
+    'delete_fail' => 'Delete Failed!',
+    'delete_sucess' => 'Delete Successfully!',
     'welcome' => 'Welcome',
     'manage_profile' => 'Manage Profile',
     'logout' => 'Logout',
@@ -131,6 +133,12 @@ return [
     'national_travel' => 'National Travel',
     'per_info' => 'Personal Infor',
     'profile' => 'Profile',
-    'del_failed' => 'Delete Failed!',
-    'del_sucess' => 'Delete Successfully!',
+    'createSuccess' => 'Create successfull',
+    'deleteSuccess' => 'Delete successfull',
+    'deleteFail' => 'Delete fail',
+    'updateSuccess' => 'Update success',
+    'quotes' => 'MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+    should have to spend money on boot camp when you can get the MCSE study materials yourself at
+    a fraction of the camp price. However, who has the willpower to actually sit through a
+    self-imposed MCSE training.',
 ];

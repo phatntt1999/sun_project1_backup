@@ -78,7 +78,7 @@
                     <div class="col-md-8">
                         <input type="submit" class="btn btn-primary" value="{{ trans('messages.save_change') }}">
                         <span></span>
-                        <input type="reset" class="btn btn-default" value="{{ trans('messages.cancel') }}">
+                        <input type="button" onclick="window.location='{{ route('profile.index') }}';return false;" class="btn btn-default" value="{{ trans('messages.cancel') }}">
                     </div>
                 </div>
             </div>

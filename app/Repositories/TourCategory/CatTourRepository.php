@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories\CategoryTour;
+namespace App\Repositories\TourCategory;
 
 use App\Models\CategoryTour;
 use App\Repositories\BaseRepository;
-use App\Repositories\CatTour\CatTourRepositoryInterface;
+use App\Repositories\TourCategory\CatTourRepositoryInterface;
 
 class CatTourRepository extends BaseRepository implements CatTourRepositoryInterface
 {

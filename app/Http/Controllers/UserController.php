@@ -72,6 +72,7 @@ class UserController extends Controller
      */
     public function update(EditProfileRequest $request, $id)
     {
+        $updateAvatar = false;
         $user = $this->userRepo->getCurrentUser();
         $avatar = $user->images->first();
         if ($request->has('avatar')) {
@@ -85,26 +86,27 @@ class UserController extends Controller
                     'imageable_type' => 'users',
                     'url' => $path . $name,
                 ];
-                $this->imageRepo->create($attributesAvatar);
+                $updateAvatar = $this->imageRepo->create($attributesAvatar);
             } else {
                 $avatar->url =  $path . $name;
                 $avatar->save();
+                $updateAvatar = true;
             }
         }
-        if ($request->has('password')) {
+        $updateInfo = false;
+        if (!empty($request->password)) {
             $password = bcrypt($request->get('password'));
             $attributes = [
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
                 'password' => $password,
             ];
+            $updateInfo = $this->userRepo->update($user->id, $attributes);
         }
-        dd($attributes);
-        $result = $this->userRepo->update($user->id, $attributes);
-        if ($result) {
-            return back()->with('msg', trans('messages.save_sucess'));
+        if ($updateInfo || $updateAvatar) {
+            return back()->with('msg_success', trans('messages.save_sucess'));
         }
 
-        return back()->with('msg', trans('messages.save_fail'));
+        return back()->with('msg_fail', trans('messages.save_fail'));
     }
 }

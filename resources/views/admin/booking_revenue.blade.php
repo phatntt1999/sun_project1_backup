@@ -14,7 +14,6 @@
 <div class="container-fluid">
 
     @if (session('createSuccess'))
-            {{-- @include('common.error') --}}
             <div class="alert alert-success">
                 <i class="fa fa-thumbs-up"></i>
                 <h2>{{session('createSuccess')}}</h2>
@@ -37,8 +36,8 @@
                         <div class="d-flex justify-content-between mb-4">
                           <h2 class="mb-0 text-md">Revenue</h2>
                           <div class="form-group mb-0">
-                            <label for="barChartFilter" class="sr-only">Filter revenue</label>
-                            {{-- <select class="custom-select" id="barChartFilter">
+                            {{-- <label for="barChartFilter" class="sr-only">Filter revenue</label>
+                            <select class="custom-select" id="barChartFilter">
                               <option disabled>Filter revenue</option>
                               <option>Daily</option>
                               <option>Weekly</option>

@@ -12,16 +12,6 @@
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-    @if (session('createSuccess'))
-        @include('common.error')
-        <div class="alert alert-success">
-            <i class="fa fa-thumbs-up"></i>
-            <h2>{{session('createSuccess')}}</h2>
-        </div>
-    @endif
-
-
     <!-- DataTales Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -29,6 +19,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
+                @include('common.checkSave')
                 <a href="{{ route('admintours.create') }}" class="btn btn-primary btn-icon-split btn-sm btn-add-new">
                     <span class="icon">
                         <i class="fas fa-plus-circle"></i>
@@ -68,10 +59,12 @@
                             <td>{{ $tour->rating }}</td>
                             <td>${{ $tour->price }}</td>
                             <td class="action-crud">
-                                <a href="{{ route('admintours.edit', ['admintour' => $tour->id]) }}" class="btn btn-info btn-circle btn-edit">
+                                <a href="{{ route('admintours.edit', ['admintour' => $tour->id]) }}"
+                                    class="btn btn-info btn-circle btn-edit">
                                     <i class="fas fa-pen"></i>
                                 </a>
-                                <form action="{{ route('admintours.destroy', ['admintour' => $tour->id ]) }}" method="POST">
+                                <form action="{{ route('admintours.destroy', ['admintour' => $tour->id ]) }}"
+                                    method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 

@@ -12,4 +12,12 @@ class ImageRepository extends BaseRepository implements ImageRepositoryInterface
     {
         parent::__construct($image);
     }
+
+    public function deleteImage($images)
+    {
+        foreach ($images as $image) {
+            return $image->delete();
+        }
+        return false;
+    }
 }

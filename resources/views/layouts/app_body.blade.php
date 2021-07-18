@@ -47,6 +47,7 @@
 @yield('header')
 </div>
 @yield('content')
+
 <div id="fh5co-testimonial" style="background-image:url(images/img_bg_1.jpg);">
 	<div class="container">
 		<div class="row animate-box">

@@ -17,7 +17,7 @@
         rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/css/sb-admin-2.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/create-tour.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/tour.css') }}" rel="stylesheet">
     <link href="{{ asset('/bower_components/font-awesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/bower_components/datatables.net-dt/css/jquery.dataTables.css') }}" rel="stylesheet"
         type="text/css">

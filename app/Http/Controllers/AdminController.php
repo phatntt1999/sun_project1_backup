@@ -21,16 +21,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //$currentUser = $this->repo->getCurrentUser();
-
-        // $authId = $currentUser->id;
-        // $authName = $currentUser->name;
-        $authId = Auth::user()->id;
-        $authName = Auth::user()->name;
+        $authUser = Auth::user();
 
         return view('admin.dashboard', [
-            'authId' => $authId,
-            'name' => $authName,
+            'authId' => $authUser->id,
+            'name' => $authUser->name,
         ]);
     }
 }

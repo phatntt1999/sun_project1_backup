@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rating;
-use App\Models\Tour;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use App\Models\Rating;
+use App\Models\Tour;
+use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\Foreach_;
 
-class TourRatingLivewareController extends Controller
+class TourRatingController extends Component
 {
     public $rating;
     public $comment;
     public $currentId;
     public $product;
+    public $tour;
     public $hideForm;
 
     protected $rules = [
@@ -26,12 +28,11 @@ class TourRatingLivewareController extends Controller
     {
         $rating = new Rating();
         $comment =  DB::table('ratings')
-            ->join('users', 'ratings.user_id', '=', 'users.id')
+            ->join('users', 'ratings.account_id', '=', 'users.id')
+            ->where('tour_id', $this->tour->id)
             ->select('*')
             ->get();
-        //$comments = Rating::where('product_id', $this->product->id)->where('status', 1);
-
-        $average = $rating->abc($this->review->id);
+        $avgRating = $rating->getAverageRating($this->tour->id);
 
         $comments = [];
         for ($i = 0; $i < count($comment); $i++) {
@@ -39,17 +40,14 @@ class TourRatingLivewareController extends Controller
             array_push($comments, $commenta);
         }
 
-        dd($average);
-        // dd(session()->all());
-        // dd($comments);
-        return view('livewire.product-ratings', compact('comments', 'average'));
+        return view('livewire.product-ratings', compact('comments', 'avgRating'));
     }
 
 
     public function mount()
     {
         if (auth()->user()) {
-            $rating = Rating::where('user_id', auth()->user()->id)->where('product_id', $this->product->id)->first();
+            $rating = Rating::where('account_id', auth()->user()->id)->where('tour_id', $this->tour->id)->first();
             if (!empty($rating)) {
                 $this->rating  = $rating->rating;
                 $this->comment = $rating->comment;
@@ -63,7 +61,7 @@ class TourRatingLivewareController extends Controller
     public function delete($id)
     {
         $rating = Rating::where('id', $id)->first();
-        if ($rating && ($rating->user_id == auth()->user()->id)) {
+        if ($rating && ($rating->account_id == auth()->user()->id)) {
             $rating->delete();
         }
         if ($this->currentId) {
@@ -76,23 +74,14 @@ class TourRatingLivewareController extends Controller
     public function rate()
     {
         $ratings = new Rating();
-        $rating = Rating::where('user_id', auth()->user()->id)->where('product_id', $this->product->id)->first();
-        $product = Tour::where('id', $this->product->id)->first();
-
-
-        if (!empty($product)) {
-
-            $product->avgRate = $ratings->abc($this->product->id);
-            try {
-                $product->save();
-            } catch (\Throwable $th) {
-                throw $th;
-            }
-        }
+        $accountId = Auth::user()->id;
+        $rating = Rating::where('account_id', $accountId)->where('tour_id', $this->tour->id)->first();
+        $tour = Tour::where('id', $this->tour->id)->first();
+        //dd($this->tour->id);
 
         if (!empty($rating)) {
-            $rating->user_id = auth()->user()->id;
-            $rating->product_id = $this->product->id;
+            $rating->account_id = auth()->user()->id;
+            $rating->tour_id = $this->tour->id;
             $rating->rating = $this->rating;
             $rating->comment = $this->comment;
             $rating->status = 1;
@@ -106,8 +95,8 @@ class TourRatingLivewareController extends Controller
             $this->hideForm = true;
         } else {
             $rating = new Rating;
-            $rating->user_id = auth()->user()->id;
-            $rating->product_id = $this->product->id;
+            $rating->account_id = auth()->user()->id;
+            $rating->tour_id = $this->tour->id;
             $rating->rating = $this->rating;
             $rating->comment = $this->comment;
             $rating->status = 1;
@@ -117,6 +106,20 @@ class TourRatingLivewareController extends Controller
                 throw $th;
             }
             $this->hideForm = true;
+        }
+
+        if (!empty($tour)) {
+            $avarageRate = $ratings->getAverageRating($this->tour->id);
+            if (empty($avarageRate)) {
+                $tour->avgRate = 0;
+            } else {
+                $tour->avgRate = $avarageRate;
+            }
+            try {
+                $tour->save();
+            } catch (\Throwable $th) {
+                throw $th;
+            }
         }
     }
 }

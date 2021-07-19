@@ -84,7 +84,6 @@ class CategoryController extends Controller
             'cat_name' => $request->name,
         ];
         $updateCategory = $this->catTourRepo->update($id, $attributes);
-
         if ($updateCategory->save()) {
             return redirect()->route('category.index')->with('msg_success', trans('messages.save_sucess'));
         }

@@ -46,12 +46,13 @@ Route::middleware(['auth'])->group(function () {
             ->name('handleVnpPayment');
         Route::get('/returnPaymentResult', [ReturnedResultPayment::class, 'returnResultPayment'])
             ->name('redirectPaymentResult');
-        Route::get('/ipn_vnpay', [IpnVnpPaymentController::class, 'getIpnPaymen
-        tResult'])
+        Route::get('/ipn_vnpay', [IpnVnpPaymentController::class, 'getIpnPaymentResult'])
             ->name('ipn_vnpay');
     });
 
-    Route::post('reviews/upload', [ReviewController::class, 'uploadImageToDir'])->name('reviews.upload');
+    Route::post('reviews/upload', [ReviewController::class, 'uploadImageToDir'])
+        ->name('reviews.upload');
+
     Route::get('/heart', [LikeController::class, 'Like'])->name('heart');
 
     Route::resource('comments', CommentController::class)->only([

@@ -25,7 +25,6 @@ class BookingTourController extends Controller
     public function showBookingTour(Request $request)
     {
         $user = $this->tourRepo->getCurrentUser();
-        // $selectedTour = Tour::find($request->tour);
         $selectedTour = $this->tourRepo->find($request->tour);
 
         return view('booking.booking_form', [
@@ -39,7 +38,6 @@ class BookingTourController extends Controller
         $inputDateStart = strtotime($request->dateStart);
         $dateStart = date('Y-m-d', $inputDateStart);
         $status = 0;
-
         $dataBooking = [
             'tour_id' => $request->tourId,
             'account_id' => $accountId,
@@ -49,7 +47,6 @@ class BookingTourController extends Controller
             'status' => $status,
             'quantity' => $request->quantity,
         ];
-
         $bookingResult = $this->bookingRepo->create($dataBooking);
 
         return view('booking.vnp_payment', [

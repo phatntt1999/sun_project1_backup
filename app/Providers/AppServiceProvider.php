@@ -46,6 +46,14 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\BookingTour\BookingRepositoryInterface::class,
             \App\Repositories\BookingTour\BookingRepository::class
         );
+        $this->app->singleton(
+            \App\Repositories\LikeReview\LikeReviewRepositoryInterface::class,
+            \App\Repositories\LikeReview\LikeReviewRepository::class
+        );
+        $this->app->singleton(
+            \App\Repositories\Comment\CommentRepositoryInterface::class,
+            \App\Repositories\Comment\CommentRepository::class
+        );
     }
 
     /**

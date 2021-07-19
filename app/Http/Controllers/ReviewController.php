@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\LikeReview;
 use App\Models\Review;
 use App\Repositories\Image\ImageRepositoryInterface;
+use App\Repositories\LikeReview\LikeReviewRepositoryInterface;
 use App\Repositories\Review\ReviewRepositoryInterface;
 use App\Repositories\ReviewCategory\CatReviewRepositoryInterface;
 use Illuminate\Http\Request;
@@ -17,15 +18,18 @@ class ReviewController extends Controller
     protected $reviewRepo;
     protected $catReviewRepo;
     protected $imageRepo;
+    protected $likeRepo;
 
     public function __construct(
         ReviewRepositoryInterface $reviewRepo,
         CatReviewRepositoryInterface $catReviewRepo,
-        ImageRepositoryInterface $imageRepo
+        ImageRepositoryInterface $imageRepo,
+        LikeReviewRepositoryInterface $likeRepo,
     ) {
         $this->reviewRepo = $reviewRepo;
         $this->catReviewRepo = $catReviewRepo;
         $this->imageRepo = $imageRepo;
+        $this->likeRepo = $likeRepo;
     }
     /**
      * Display a listing of the resource.
@@ -103,10 +107,13 @@ class ReviewController extends Controller
         }
         $images = $review->images->all();
         $user = $review->user;
-
-        $liked = LikeReview::where('account_id', Auth::id())->where('review_id', $id)->first();
-        $likeController = new LikeController;
-        $countLike = $likeController->countLike($id);
+        $idCurrentUser = $this->likeRepo->getCurrentUser();
+        if ($idCurrentUser == null) {
+            $liked = null;
+        } else {
+            $liked = $this->likeRepo->isLike($idCurrentUser->id, $id);
+        }
+        $countLike = $this->likeRepo->countLike($id);
 
         return view('single-blog', compact('review', 'images', 'user', 'liked', 'countLike', 'catReviews'));
     }

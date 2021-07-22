@@ -12,4 +12,22 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
     {
         parent::__construct($booking);
     }
+
+    public function getNotApprovedBookingRequest()
+    {
+        $results = $this->model::with('user')->with('tour')
+            ->where('status', -1)
+            ->paginate(config('app.default_paginate_tour'));
+        return $results;
+    }
+
+    public function approved($id)
+    {
+        parent::update($id, ['status' => 0]);
+    }
+
+    public function reject($id)
+    {
+        parent::update($id, ['status' => 1]);
+    }
 }

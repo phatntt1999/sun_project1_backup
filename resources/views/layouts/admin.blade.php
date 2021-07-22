@@ -24,7 +24,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('/bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('bower_components/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('/bower_components/bootstrap/dist/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- Custom scripts for all pages-->
@@ -35,6 +35,8 @@
     {{-- <script src="{{ asset('/bower_components/dataTables.bootstrap4.min.js/index.js') }}"></script> --}}
     <!-- Table Support plugins -->
     <script src="{{ asset('/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="{{ asset('/assets/js/notification.js') }}"></script>
 
 </head>
 
@@ -110,14 +112,21 @@
                 Action
             </div>
 
-            <!-- Nav Item - Charts -->
+            <!-- Nav Item - Revenue -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('processBooking') }}">
+                    <i class="fas fa-fw fa-border-style"></i>
+                    <span>Booking Request</span></a>
+            </li>
+
+            <!-- Nav Item - Revenue -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('revenue') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Revenue</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
+            <!-- Nav Item - Homepage -->
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-table"></i>
@@ -209,9 +218,7 @@
                                             <i class="fas fa-file-alt text-white"></i>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    <div id="noti_content">
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -239,6 +246,25 @@
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li> --}}
+                        <li class="nav-item dropdown no-arrow mx-1 dropdown-notifications">
+                            <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+                                <i data-count="0" class="fas fa-bell fa-fw notification-icon"></i>
+                            </a>
+
+                            <div class="dropdown-container dropdown-menu-right shadow animated--grow-in">
+                                <div class="dropdown-toolbar">
+                                    <div class="dropdown-toolbar-actions">
+                                        <a href="#">Mark all as read</a>
+                                    </div>
+                                    <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
+                                </div>
+                                <ul class="dropdown-menu" style="position: relative;">
+                                </ul>
+                                <div class="dropdown-footer text-center">
+                                    <a href="#">View All</a>
+                                </div>
+                            </div>
+                        </li>
 
                         <!-- Nav Item - Messages -->
                         {{-- <li class="nav-item dropdown no-arrow mx-1">
@@ -349,8 +375,38 @@
                 @yield('content')
             </div>
         </div>
-
+        {{-- @section('script')
+        <script>
+            console.log('abc');
+            var channel = window.Echo.channel('my-channel');
+            channel.listen('.my-event', function(data) {
+                $('#noti_content').append('<span>'+data.message.content+'</span>')
+            });
+        </script>
+        @endsection --}}
         <!-- Page level custom scripts -->
+
+
+    {{-- <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+        console.log('test');
+        var pusher = new Pusher('26d191310ab032d5c795', {
+          cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            var newNotificationHtml = `
+            <div class="small text-gray-500">December 12, 2019</div>
+            <span>${data.message.content}</span>`;
+
+            console.log(data);
+            $('#noti_content').append(newNotificationHtml);
+
+            alert(JSON.stringify(data));
+        });
+    </script> --}}
         <script src="{{ asset('/assets/js/sb-admin-2.min.js') }}"></script>
 
 </body>

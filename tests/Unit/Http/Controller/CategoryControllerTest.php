@@ -23,7 +23,7 @@ class CategoryControllerTest extends TestCase
         $this->categories = [
             'name' => $this->faker->name,
         ];
-        $this->categoryTour = new CategoryController();
+        // $this->categoryTour = new CategoryController();
         $this->retrieveCategory = new CategoryTour();
     }
 

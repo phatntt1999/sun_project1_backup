@@ -79,8 +79,6 @@ class ProductRatings extends Component
         $accountId = Auth::user()->id;
         $rating = Rating::where('account_id', $accountId)->where('tour_id', $this->tour->id)->first();
         $tour = Tour::where('id', $this->tour->id)->first();
-        //dd($this->tour->id);
-
         if (!empty($rating)) {
             $rating->account_id = auth()->user()->id;
             $rating->tour_id = $this->tour->id;
@@ -92,7 +90,6 @@ class ProductRatings extends Component
             } catch (\Throwable $th) {
                 throw $th;
             }
-
             session()->flash('message', 'Success!');
             $this->hideForm = true;
         } else {

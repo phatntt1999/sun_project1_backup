@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Sun Booking Tour'),
 
     /*
     |--------------------------------------------------------------------------
@@ -171,7 +171,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
@@ -230,9 +230,39 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Paginate for listing data
+    |--------------------------------------------------------------------------
+    |
+    | Set up the paginate for retrive data of some view.
+    */
+
     'default_paginate_tour_admin' => '10',
     'default_paginate_category_admin' => '5',
     'default_paginate_tour' => '9',
     'default_paginate_review' => '4',
     'default_paginate_user' => '15',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Status of tour booking
+    |--------------------------------------------------------------------------
+    |
+    | -1 will be inprocessing
+    |  0 will be approved by admin
+    | -1 will be rejected by admin
+    */
+
+    'pending' => -1,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Return url from email
+    |--------------------------------------------------------------------------
+    |
+    | This will define the url action in email
+    */
+
+    'url_admin_inprocess_booking' => 'http://127.0.0.1:8000/admin/booking-requests',
 ];

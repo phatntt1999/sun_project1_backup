@@ -1,16 +1,4 @@
 {
     "/js/app.js": "/js/app.js",
-    "/assets/js/all-js.js": "/assets/js/all-js.js",
-    "/assets/js/main.js": "/assets/js/main.js",
-    "/assets/js/modernizr-2.6.2.min.js": "/assets/js/modernizr-2.6.2.min.js",
-    "/css/app.css": "/css/app.css",
-    "/assets/css/style.css": "/assets/css/style.css",
-    "/assets/css/style2.css": "/assets/css/style2.css",
-    "/assets/css/custom-heart.css": "/assets/css/custom-heart.css",
-    "/assets/css/icomoon.css": "/assets/css/icomoon.css",
-    "/assets/css/header.css": "/assets/css/header.css",
-    "/assets/css/sb-admin-2.css": "/assets/css/sb-admin-2.css",
-    "/assets/css/superfish.css": "/assets/css/superfish.css",
-    "/assets/css/bookingForm.css": "/assets/css/bookingForm.css",
-    "/assets/css/create-tour.css": "/assets/css/create-tour.css"
+    "/css/app.css": "/css/app.css"
 }

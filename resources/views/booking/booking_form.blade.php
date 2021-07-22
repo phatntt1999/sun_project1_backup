@@ -33,7 +33,7 @@
                         id="quantity" name="quantity" min="1" max="{{ $selectedTour->num_of_participants }}"
                         value="1" />
                     {{ trans('messages.date_start') }} <input type="date" id="start" name="dateStart"
-                        value="{{ date('Y-d-m') }}" />
+                        value="{{ date('Y-d-m') }}" required/>
                     <p>{{ trans('messages.total') }} : <b><span id="total">${{ $selectedTour->price }}</span></b></p>
                     <div class="text-center">
                         <input type="submit" class="button" value="{{ trans('messages.payment') }}">

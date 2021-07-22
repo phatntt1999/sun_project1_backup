@@ -3,7 +3,6 @@
 <!-- Sidebar -->
 @section('sidebar')
 @parent
-
 @endsection
 <!-- End of Sidebar -->
 
@@ -13,40 +12,51 @@
     <!-- DataTales Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Category List</h5>
+            <h5 class="m-0 font-weight-bold text-primary">List Inapproved Booking Requests</h5>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <a href="{{ route('category.create') }}" class="btn btn-primary btn-icon-split btn-sm btn-add-new">
-                    <span class="icon">
-                        <i class="fas fa-plus-circle"></i>
-                    </span>
-                    <span class="text">Add new</span>
-                </a>
                 @include('common.checkSave')
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Name</th>
+                            <th>Tour Name</th>
+                            <th>Start Date</th>
+                            <th>Duration</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Customer</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th></th>
-                            <th>Name</th>
+                            <th>Tour name</th>
+                            <th>Start date</th>
+                            <th>Duration</th>
+                            <th>Quantity</th>
+                            <th>Total price</th>
+                            <th>Customer</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($cat_tours as $cat_tour)
+                        @foreach ($bookingReqs as $bookingReq)
                         <tr>
-                            <td>{{ $loop->index +1 }}</td>
-                            <td>{{ $cat_tour->cat_name }}</td>
+                            <td>{{ $bookingReq->tour->name }}</td>
+                            <td>{{ $bookingReq->booking_start_date }}</td>
+                            <td>{{ $bookingReq->duration }}</td>
+                            <td>{{ $bookingReq->quantity }}</td>
+                            <td>{{ $bookingReq->total_price }}</td>
+                            <td>{{ $bookingReq->user->name }}</td>
                             <td class="action-crud">
-                                <a href="{{ route('category.edit', $cat_tour->id) }}" class="btn btn-info btn-circle btn-edit">
-                                    <i class="fas fa-pen"></i>
+                                <a href="{{ route('approveBooking', $bookingReq->id) }}"
+                                    class="btn btn-success btn-circle btn-edit">
+                                    <i class="fas fa-check"></i>
+                                </a>
+                                <a href="{{ route('rejectBooking', $bookingReq->id) }}"
+                                    class="btn btn-danger btn-circle btn-edit">
+                                    <i class="fas fa-times"></i>
                                 </a>
                             </td>
                         </tr>
@@ -54,7 +64,7 @@
                     </tbody>
                 </table>
             </div>
-            {{ $cat_tours->fragment('table')->links() }}
+            {{ $bookingReqs->fragment('table')->links() }}
         </div>
     </div>
 

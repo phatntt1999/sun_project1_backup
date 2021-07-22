@@ -20,14 +20,13 @@ class CategoryModelTest extends TestCase
     {
         parent::setUp();
         $this->category_tour = CategoryTour::factory()->create();
-        //$this->tour = Tour::factory()->create(['cat_tour_id' => $this->category_tour->id]);
     }
     /**
      * A basic unit test example.
      *
      * @return void
      */
-    public function test_category_tour_has_many_tours()
+    public function testCategoryTourHasManyTours()
     {
         $this->category_tour = CategoryTour::factory()->create();
 
@@ -35,7 +34,7 @@ class CategoryModelTest extends TestCase
         $this->assertEquals('cat_tour_id', $this->category_tour->tours()->getForeignKeyName());
     }
 
-    public function test_contains_valid_fillable_properties()
+    public function testContainsValidFillableProperties()
     {
         $this->assertEquals(['cat_name'], $this->category_tour->getFillable());
     }

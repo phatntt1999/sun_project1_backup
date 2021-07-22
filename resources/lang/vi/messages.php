@@ -141,4 +141,6 @@ return [
     Một số người không hiểu tại sao bạn phải chi tiền cho chương trình đào tạo khi
     bạn có thể tự nhận tài liệu học MCSE với giá chỉ bằng một phần nhỏ của chương trình đào tạo.
     Tuy nhiên, ai có đủ ý chí để thực sự ngồi qua một khóa đào tạo MCSE tự áp đặt.',
+    'approved_booking_request' => 'Đã chấp nhận yêu cầu đặt tour và thông báo chấp nhận sẽ được gửi đến khách hàng',
+    'rejected_booking_request' => 'Đã từ chối yêu cầu đặt tour và thông báo từ chối sẽ được gửi đến khách hàng',
 ];

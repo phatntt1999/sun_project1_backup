@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmail;
 use App\Models\BookingTour;
 use App\Models\Tour;
 use App\Repositories\BookingTour\BookingRepositoryInterface;
@@ -37,7 +38,7 @@ class BookingTourController extends Controller
         $accountId = $this->tourRepo->getCurrentUser()->id;
         $inputDateStart = strtotime($request->dateStart);
         $dateStart = date('Y-m-d', $inputDateStart);
-        $status = 0;
+        $status = -1;
         $dataBooking = [
             'tour_id' => $request->tourId,
             'account_id' => $accountId,
@@ -48,6 +49,13 @@ class BookingTourController extends Controller
             'quantity' => $request->quantity,
         ];
         $bookingResult = $this->bookingRepo->create($dataBooking);
+
+        // $message = [
+        //     'type' => 'Create booking',
+        //     'task' => $bookingResult->tour->name,
+        //     'content' => 'has been created!',
+        // ];
+        // SendEmail::dispatch($message)->delay(now()->addMinute(1));
 
         return view('booking.vnp_payment', [
             'totalPrice' => $bookingResult->total_price,
